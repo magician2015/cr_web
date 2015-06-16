@@ -14,7 +14,9 @@ span.input-group-addon {
 	margin-left:-20px;
 }
 
-
+#receipt {
+	word-wrap: break-word;
+}
 
 
 

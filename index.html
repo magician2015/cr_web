@@ -22,6 +22,9 @@
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <script src="js/vendor/jquery.form.js"></script>
+        <script>
+        </script>
+       
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -64,39 +67,39 @@
                 <div class="form-group">
                     <label for="jurisdiction">Jurisdiction of organisation</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="jurisdiction" id="jurisdiction" placeholder="Example: US" required>
+                        <input type="text" class="form-control" name="jurisdiction" id="jurisdiction" placeholder="Example: US" value="US" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
                   <div class="form-group">
                     <label for="InputEmail">Identification of natural person using any pseudonymous identifiers</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="sub" name="sub" placeholder="Example: sarah@engageidentity.com" required>
+                        <input type="text" class="form-control" id="sub" name="sub" placeholder="Example: sarah@engageidentity.com" value="sarah@engageidentity.com" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Service Titles</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="svc1" name="svc1" placeholder="Example: Amazon" required>
+                        <input type="text" class="form-control" id="svc1" name="svc1" placeholder="Example: Amazon" value="Amazon" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       <div class="input-group">
-                        <input type="text" class="form-control" id="svc2" name="svc2" placeholder="Example: Amazon Express" required>
+                        <input type="text" class="form-control" id="svc2" name="svc2" placeholder="Example: Amazon Express" value="Amazon Express" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="InputEmail">Short Notice Field</label>
+                    <label>Short Notice Field</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="notice" name="notice" placeholder="Example: http://example.com/notice" required>
+                        <input type="text" class="form-control" id="notice" name="notice" placeholder="Example: http://example.com/notice" value="http://example.com/notice" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="InputEmail">Privacy Policy Link</label>
+                    <label>Privacy Policy Link</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="privacy_uri" name="privacy_uri" placeholder="Example: http://example.com/policy" required>
+                        <input type="text" class="form-control" id="policy_uri" name="policy_uri" placeholder="Example: http://example.com/policy" value="http://example.com/policy" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
@@ -104,22 +107,22 @@
                     <label>Data Controllers</label><br>
                     Subject: 
                     <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller1" name="data_controller1" placeholder="Example: Server" required>
+                        <input type="text" class="form-control" id="data_controller1" name="data_controller1" placeholder="Example: Server" value="Server" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       Controller: 
                       <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller2" name="data_controller2" placeholder="Example: Amazon Web Services" required>
+                        <input type="text" class="form-control" id="data_controller2" name="data_controller2" placeholder="Example: Amazon Web Services" value="Amazon Web Services" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div><br>
                     Subject: 
                     <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller3" name="data_controller3" placeholder="Example: Server jurisdiction" required>
+                        <input type="text" class="form-control" id="data_controller3" name="data_controller3" placeholder="Example: Server jurisdiction" value="Server jurisdiction" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       Controller: 
                       <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller4" name="data_controller4" placeholder="Example: State of Washington" required>
+                        <input type="text" class="form-control" id="data_controller4" name="data_controller4" placeholder="Example: State of Washington" value="State of Washington" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
@@ -127,33 +130,33 @@
                     <label>Consent Transaction Data</label><br>
                     Subject:
                     <div class="input-group">
-                        <input type="text" class="form-control" id="consent_payload1" name="consent_payload1" placeholder="Example: Privacy Policy" required>
+                        <input type="text" class="form-control" id="consent_payload1" name="consent_payload1" placeholder="Example: Privacy Policy" value="Privacy Policy" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       Consent: 
                       <div class="input-group">
-                        <input type="text" class="form-control" id="consent_payload2" name="consent_payload2" placeholder="Example: agree" required>
+                        <input type="text" class="form-control" id="consent_payload2" name="consent_payload2" placeholder="Example: agree" value="agree" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div><br>
                     Subject: 
                     <div class="input-group">
-                        <input type="text" class="form-control" id="consent_payload3" name="consent_payload3" placeholder="Example: Terms of Service" required>
+                        <input type="text" class="form-control" id="consent_payload3" name="consent_payload3" placeholder="Example: Terms of Service" value="Terms of Service" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       Consent: 
                       <div class="input-group">
-                        <input type="text" class="form-control" id="consent_payload4" name="consent_payload4" placeholder="Example: agree" required>
+                        <input type="text" class="form-control" id="consent_payload4" name="consent_payload4" placeholder="Example: agree" value="agree" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Purposes</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="purpose1" name="purpose1" placeholder="Example: marketing" required>
+                        <input type="text" class="form-control" id="purpose1" name="purpose1" placeholder="Example: marketing" value="marketing" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       <div class="input-group">
-                        <input type="text" class="form-control" id="purpose2" name="purpose2" placeholder="Example: research" required>
+                        <input type="text" class="form-control" id="purpose2" name="purpose2" placeholder="Example: research" value="research" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
@@ -161,62 +164,62 @@
                     <label>PII Collected</label><br>
                     Category:
                     <div class="input-group">
-                        <input type="text" class="form-control" id="pii_collected1" name="pii_collected1" placeholder="Example: name" required>
+                        <input type="text" class="form-control" id="pii_collected1" name="pii_collected1" placeholder="Example: name" value="name" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       Value: 
                       <div class="input-group">
-                        <input type="text" class="form-control" id="pii_collected2" name="pii_collected2" placeholder="Example: Sarah Squire" required>
+                        <input type="text" class="form-control" id="pii_collected2" name="pii_collected2" placeholder="Example: Sarah Squire" value="Sarah Squire" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div><br>
                     Category: 
                     <div class="input-group">
-                        <input type="text" class="form-control" id="pii_collected3" name="pii_collected3" placeholder="Example: email" required>
+                        <input type="text" class="form-control" id="pii_collected3" name="pii_collected3" placeholder="Example: email" value="email" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       Value: 
                       <div class="input-group">
-                        <input type="text" class="form-control" id="pii_collected4" name="pii_collected4" placeholder="Example: sarah@sarahsquire.org" required>
+                        <input type="text" class="form-control" id="pii_collected4" name="pii_collected4" placeholder="Example: sarah@sarahsquire.org" value="sarah@sarahsquire.org" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Sensitive Information</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="sensitive1" name="sensitive1" placeholder="Example: http://example.com/medical" required>
+                        <input type="text" class="form-control" id="sensitive1" name="sensitive1" placeholder="Example: http://example.com/medical" value="http://example.com/medical" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       <div class="input-group">
-                        <input type="text" class="form-control" id="sensitive2" name="sensitive2" placeholder="Example: http://example.com/financial" required>
+                        <input type="text" class="form-control" id="sensitive2" name="sensitive2" placeholder="Example: http://example.com/financial" value="http://example.com/financial" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                   </div>
                     <div class="form-group">
                     <label>3rd party sharing of personal information</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="sharing1" name="sharing1" placeholder="Example: contact information" required>
+                        <input type="text" class="form-control" id="sharing1" name="sharing1" placeholder="Example: contact information" value="contact information" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       <div class="input-group">
-                        <input type="text" class="form-control" id="sharing2" name="sharing2" placeholder="Example: demographic information" required>
+                        <input type="text" class="form-control" id="sharing2" name="sharing2" placeholder="Example: demographic information" value="demographic information" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>OC of data collection</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="context1" name="context1" placeholder="Example: active privacy policy consent" required>
+                        <input type="text" class="form-control" id="context1" name="context1" placeholder="Example: active privacy policy consent" value="active privacy policy consent" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       <div class="input-group">
-                        <input type="text" class="form-control" id="context2" name="context2" placeholder="Example: passive terms of service consent" required>
+                        <input type="text" class="form-control" id="context2" name="context2" placeholder="Example: passive terms of service consent" value="passive terms of service consent" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Resource Server Identifier</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="aud" name="aud" placeholder="Example: http://engageidentity.com/protected" required>
+                        <input type="text" class="form-control" id="aud" name="aud" placeholder="Example: http://engageidentity.com/protected" value="http://engageidentity.com/protected" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       
@@ -224,16 +227,19 @@
                 <div class="form-group">
                     <label>Scopes</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="scope" name="scope" placeholder="Example: read update" required>
+                        <input type="text" class="form-control" id="scope" name="scope" placeholder="Example: read update" value="read update" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       
                 </div>
                 
-                <input type="submit" name="submit" id="submit" value="Create Receipt &raquo;" class="btn btn-primary">
+                
             </div>
         </form>
+        
+       
     </div>
+    <button id="whatever" class="btn btn-primary" onclick="apiPost()">Create Receipt &raquo;</button>
 </div>
           
         </div>     
@@ -241,8 +247,10 @@
         </div>
         <div class="col-md-5">
           <h2>Receipt Contents</h2>
-          <p>The unencoded contents of your receipt will appear here after you submit the form. </p>
+          <p id="receipt">The unencoded contents of your receipt will appear here after you submit the form. </p>
           <p><a class="btn btn-primary" href="#" role="button" disabled="disabled">Download Receipt &raquo;</a></p>
+
+</script>
        </div>
       </div>
 
@@ -251,7 +259,14 @@
       <footer>
         
       </footer>
-    </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    </div> <!-- /container -->  
+
+ 
+
+
+
+
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
         <script src="js/vendor/bootstrap.min.js"></script>
