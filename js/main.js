@@ -40,7 +40,7 @@ var oInput = '{"jurisdiction" : "' + jurisdiction + '","sub" : "' + sub + '" ,"s
 jQuery(document).ready(function($){
 $.ajax({
   type: "POST",
-  url: "http://yourdomain.com:8080/api/mvcr",
+  url: "http://localhost:8080/api/mvcr",
   data: oInput,
   contentType : "application/json", 
     dataType: 'json',
