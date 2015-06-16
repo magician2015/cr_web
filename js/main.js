@@ -37,7 +37,7 @@ var scope = document.getElementById('scope').value;
 var oInput = '{"jurisdiction" : "' + jurisdiction + '","sub" : "' + sub + '" ,"svc" : ["' + svc1 + '","' + svc2 + '"] ,"notice" : "' + notice + '" ,	"policy_uri" : "' + policy_uri + '" ,	"data_controller" : {"' + data_controller1 + '" : "' + data_controller2 + '","' + data_controller3 + '" : "' + data_controller4 + '"} ,	"consent_payload" : {"' + consent_payload1 + '" : "' + consent_payload2 + '","' + consent_payload3 + '" : "' + consent_payload4 + '"} ,	"purpose" : ["' + purpose1 + '","' + purpose2 + '"] ,	"pii_collected" : {"' + pii_collected1 + '" : "' + pii_collected2 + '","' + pii_collected3 + '" : "' + pii_collected4 + '"} ,	"sensitive" : ["' + sensitive1 + '","' + sensitive2 + '"] ,	"sharing" : ["' + sharing1 + '","' + sharing2 + '"] ,	"context" : ["' + context1 + '","' + context2 + '"] ,	"aud" : "' + aud + '" ,	"scopes" : "' + scope + '"  }';
 
 
-jQuery(document).ready(function($){
+jQuery(document).ready(function(){
 $.ajax({
   type: "POST",
   url: "http://localhost:8080/api/mvcr",
@@ -46,11 +46,37 @@ $.ajax({
     dataType: 'json',
   success: function (data) {
   	var newdata = data.responseText;
-  	document.getElementById("receipt").innerHTML = newdata;
+  	var header = newdata.substring(0, newdata.indexOf('.'));
+  	document.getElementById("receipt").innerHTML = header;
   },
 error: function (data) {
-	  	var newdata = data.responseText;
-  	document.getElementById("receipt").innerHTML = newdata;
+	var newdata = data.responseText;
+  	var segments = newdata.split('.');
+
+  	var headerSeg = segments[0];
+    var payloadSeg = segments[1];
+    var signatureSeg = segments[2];
+
+    var header = b64utos(headerSeg);
+    var payload = b64utos(payloadSeg);
+
+    var prettyPayload = "";
+   for(var i = 0; i < payload.length; ++i)
+   {
+       if(payload[i] == ",")
+       {
+          prettyPayload += " ,<br>";
+       }
+       else
+       {
+          prettyPayload += payload[i];
+       }
+   }
+   
+
+
+   document.getElementById("receipt").innerHTML = "<h3>Header</h3>" + header + "<br><h3>Payload</h3>" + prettyPayload + "<br><h3>Signature</h3>" + signatureSeg;
+
 }
 });
 });
