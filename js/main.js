@@ -45,11 +45,6 @@ $.ajax({
   contentType : "application/json", 
     dataType: 'json',
   success: function (data) {
-  	var newdata = data.responseText;
-  	var header = newdata.substring(0, newdata.indexOf('.'));
-  	document.getElementById("receipt").innerHTML = header;
-  },
-error: function (data) {
 	var newdata = data.responseText;
   	var segments = newdata.split('.');
 
@@ -73,9 +68,38 @@ error: function (data) {
        }
    }
    
-
-
    document.getElementById("receipt").innerHTML = "<h3>Header</h3>" + header + "<br><h3>Payload</h3>" + prettyPayload + "<br><h3>Signature</h3>" + signatureSeg;
+  },
+error: function (data) {
+	var newdata = data.responseText;
+	var blob = new Blob([newdata], {type: "application/json"});
+	var url  = URL.createObjectURL(blob);
+  	var segments = newdata.split('.');
+
+
+  	var headerSeg = segments[0];
+    var payloadSeg = segments[1];
+    var signatureSeg = segments[2];
+
+    var header = b64utos(headerSeg);
+    var payload = b64utos(payloadSeg);
+
+    var prettyPayload = "";
+   for(var i = 0; i < payload.length; ++i)
+   {
+       if(payload[i] == ",")
+       {
+          prettyPayload += " ,<br>";
+       }
+       else
+       {
+          prettyPayload += payload[i];
+       }
+   }
+   
+   document.getElementById("receipt").innerHTML = "<h3>Header</h3>" + header + "<br><h3>Payload</h3>" + prettyPayload + "<br><h3>Signature</h3>" + signatureSeg;
+
+   document.getElementById("receiptdl").outerHTML = '<a id="receiptdl" class="btn btn-primary" download role="button" href="' + url + '">Download Receipt &raquo;</a>';
 
 }
 });
