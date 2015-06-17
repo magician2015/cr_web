@@ -24,7 +24,6 @@ $(document).ready(function() {
     oPost.aud = $('#aud').val();
     oPost.scopes = $('#scope').val();
 
-    console.log(JSON.stringify(oPost));
 
 
       $.ajax({
@@ -38,29 +37,17 @@ $(document).ready(function() {
   var blob = new Blob([data], {type: "application/json"});
   var url  = URL.createObjectURL(blob);
     var segments = data.split('.');
-
-
-    var headerSeg = segments[0];
     var payloadSeg = segments[1];
-    var signatureSeg = segments[2];
 
-    var header = b64utos(headerSeg);
     var payload = b64utos(payloadSeg);
+    var opayload = JSON.parse(payload);
+    console.log(opayload);
 
-    var prettyPayload = "";
-   for(var i = 0; i < payload.length; ++i)
-   {
-       if(payload[i] == ",")
-       {
-          prettyPayload += " ,<br>";
-       }
-       else
-       {
-          prettyPayload += payload[i];
-       }
-   }
+    $("#rjurisdiction").html(opayload.jurisdiction);
+    $("#rsub").html(opayload.sub);
    
-   document.getElementById("receipt").innerHTML = "<h3>Header</h3>" + header + "<br><h3>Payload</h3>" + prettyPayload + "<br><h3>Signature</h3>" + signatureSeg;
+   $("#rhidden").show("slow");
+   $("#receipt").hide("slow");
 
    document.getElementById("receiptdl").outerHTML = '<a id="receiptdl" class="btn btn-primary" download role="button" href="' + url + '">Download Receipt &raquo;</a>';
         },

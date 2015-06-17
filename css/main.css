@@ -18,12 +18,20 @@ span.input-group-addon {
 	word-wrap: break-word;
 }
 
+.navbar-inverse .navbar-brand {
+  color: #fff;
+}
 
 
+#rhidden {
+	display: none;
+}
 
+.receipt span {
+	font-style: italic;
+}
 
-
-
-
-
+.rindent {
+	margin-left:20px;
+}
 

@@ -37,7 +37,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Consent Receipt Generator</a>
+          <span class="navbar-brand"> <span class="glyphicon glyphicon-barcode"></span> Consent Receipt Generator</span>
         </div>
         
       </div>
@@ -243,9 +243,22 @@
         </div>     
         <div class="col-md-2">
         </div>
-        <div class="col-md-5">
+        <div class="col-md-5 well receipt">
           <h2>Receipt Contents</h2>
           <p id="receipt">The unencoded contents of your receipt will appear here after you submit the form. </p>
+          <div id="rhidden">
+            <p></p>
+            <p>
+              <button type="button" class="btn btn-info btn-xs">Jurisdiction of organisation</button>
+            </p>
+            <p id="rjurisdiction" class="rindent">
+            </p>
+            <p>
+              <button type="button" class="btn btn-info btn-xs">Identification of natural person using any pseudonymous identifiers</button>
+            </p>
+            <p id="rsub" class="rindent">
+            </p>
+          </div>
           <p><a id="receiptdl" class="btn btn-primary" href="#" role="button" disabled="disabled">Download Receipt &raquo;</a></p>
 
 </script>
