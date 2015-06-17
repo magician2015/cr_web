@@ -34,8 +34,8 @@ $(document).ready(function() {
         success: function (data) {
           console.log(data);
           console.log("SUCCESS");
-  var blob = new Blob([data], {type: "application/json"});
-  var url  = URL.createObjectURL(blob);
+  var receipt = new Blob([data], {type: "application/json"});
+  var url  = URL.createObjectURL(receipt);
     var segments = data.split('.');
     var payloadSeg = segments[1];
 
@@ -85,8 +85,9 @@ $(document).ready(function() {
 
    $("#rhidden").show("slow");
    $("#receipt").hide("slow");
+   var receiptdl = '<a id="receiptdl" class="btn btn-primary" download role="button" href="' + url + '">Download Receipt &raquo;</a>';
 
-   document.getElementById("receiptdl").outerHTML = '<a id="receiptdl" class="btn btn-primary" download role="button" href="' + url + '">Download Receipt &raquo;</a>';
+   $("#receiptdl").html(receiptdl);
         },
         error: function(data) {
           console.log(data);
