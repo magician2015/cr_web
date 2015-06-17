@@ -45,6 +45,10 @@ $(document).ready(function() {
 
     $("#rjurisdiction").html(opayload.jurisdiction);
     $("#rsub").html(opayload.sub);
+    $("#rsvc1").html(opayload.svc[0]);
+    $("#rsvc2").html(opayload.svc[1]);
+    $("#rnotice").html(opayload.notice);
+    $("#rpolicy_uri").html(opayload.policy_uri);
    
    $("#rhidden").show("slow");
    $("#receipt").hide("slow");
