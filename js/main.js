@@ -73,7 +73,16 @@ $(document).ready(function() {
     $("#rsensitive2").html(opayload.sensitive[1]);
     $("#rsharing1").html(opayload.sharing[0]);
     $("#rsharing2").html(opayload.sharing[1]);
-   
+    $("#rcontext1").html(opayload.context[0]);
+    $("#rcontext2").html(opayload.context[1]);
+    $("#raud").html(opayload.aud);
+    $("#rscope").html(opayload.scopes);
+    $("#riss").html(opayload.iss);
+    var iat = new Date(opayload.iat);
+    $("#riat").html(iat);
+    $("#rjti").html(opayload.jti);
+
+
    $("#rhidden").show("slow");
    $("#receipt").hide("slow");
 
