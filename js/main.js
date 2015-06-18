@@ -34,7 +34,7 @@ $(document).ready(function() {
         success: function (data) {
           console.log(data);
           console.log("SUCCESS");
-  var receipt = new Blob([data], {type: "application/json"});
+  var receipt = new Blob([data], {type: "application/jwt"});
   var url  = URL.createObjectURL(receipt);
     var segments = data.split('.');
     var payloadSeg = segments[1];
@@ -85,9 +85,10 @@ $(document).ready(function() {
 
    $("#rhidden").show("slow");
    $("#receipt").hide("slow");
-   var receiptdl = '<a id="receiptdl" class="btn btn-primary" download role="button" href="' + url + '">Download Receipt &raquo;</a>';
 
-   $("#receiptdl").html(receiptdl);
+   $("#receiptdl a").attr('href', url);
+   $("#receiptdl a").attr('disabled', false);
+
         },
         error: function(data) {
           console.log(data);
