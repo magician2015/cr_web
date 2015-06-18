@@ -35,7 +35,7 @@ $(document).ready(function() {
 
       $.ajax({
         type: "POST",
-        url: "http://localhost:8080/api/mvcr",
+        url: "http://www.consentreceipt.org/api/mvcr",
         data: JSON.stringify(oPost),
         contentType : "application/json", 
         success: function (data) {
