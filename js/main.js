@@ -2,6 +2,13 @@
 $(document).ready(function() {
 
   $('#submit').on('click', function(event) {
+	  
+      $('html, body').animate({
+             scrollTop: $(".receipt").offset().top - 55
+         }, 1000);
+   
+	  
+	  
     var oPost = {};
     oPost.jurisdiction = $('#jurisdiction').val();
     oPost.sub = $('#sub').val();
