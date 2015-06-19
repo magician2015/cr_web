@@ -96,6 +96,39 @@ $(document).ready(function() {
    $("#receiptdl a").attr('href', url);
    $("#receiptdl a").attr('disabled', false);
 
+		//
+		// check signature
+		//
+   
+   		// fetch key
+  	 	var jwt = data;
+   		$.ajax({
+			type: "GET",
+			url: "http://www.consentreceipt.org/api/jwk",
+			data: "json",
+			success: function(data) {
+				console.log(data);
+				var key = KEYUTIL.getKey(data.keys[0]); // there's only one key to parse
+				
+				// validate the JWT
+				var isValid = KJUR.jws.JWS.verify(jwt, key);
+				if (isValid) {
+					$('#sig').removeClass('bg-warning');
+					$('#sig').addClass('bg-success');
+					$('#sig').html('Receipt signature is valid.');
+				} else {
+					$('#sig').removeClass('bg-warning');
+					$('#sig').addClass('bg-danger');
+					$('#sig').html('Receipt signature is invalid.');
+				}
+			},
+			error: function() {
+				$('#sig').removeClass('bg-warning');
+				$('#sig').addClass('bg-danger');
+				$('#sig').html('Unable to fetch key for receipt.');
+			}
+   		});
+   
         },
         error: function(data) {
           console.log(data);
