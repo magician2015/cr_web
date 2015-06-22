@@ -37,6 +37,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
+
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -54,7 +55,12 @@
       <div class="container">
         <h1>Welcome!</h1>
         <p>This is an online form that will take input about a consent reciept and generate a signed receipt in JSON Web Token format.</p>
-        
+        <div class="cis"> 
+          <img id="cis" src="img/cis.png" />
+        </div>
+        <div class="cis">
+          This is a product of the Consent and Information Sharing<br> Working Group within the Kantara Initiative.
+        </div>
       </div>
     </div>
 
@@ -362,6 +368,11 @@
               <button type="button" class="btn btn-info btn-xs">Transaction Number</button>
             </p>
             <p id="rjti" class="rindent wrap">
+            </p>
+            <p>
+              <button type="button" class="btn btn-info btn-xs">Timestamp</button>
+            </p>
+            <p id="riat" class="rindent wrap">
             </p>
 			<p id="sig" class="bg-warning">Checking signature...</p>
 			
