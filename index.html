@@ -54,7 +54,7 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Welcome!</h1>
-        <p>This is an online form that will take input about a consent reciept and generate a signed receipt in JSON Web Token format.</p>
+        <p>This form calls an API that receives consent record data.  It also renders a receipt and generates a signed receipt in a JSON Web Token Format that can be downloaded. </p>
         <div class="cis"> 
           <img id="cis" src="img/cis.png" />
         </div>
@@ -69,6 +69,7 @@
       <div class="row">
         <div class="col-md-5">
           <h2>Receipt Input</h2>
+          <p>Form values are suggestion for reference.</p>
           <div class="container">
     <div class="row">
         <form role="form">
@@ -82,27 +83,20 @@
                     </div>
                 </div>
                   <div class="form-group">
-                    <label for="InputEmail">Identification of natural person using any pseudonymous identifiers</label>
+                    <label for="InputEmail">Id of natural person</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="sub" name="sub" placeholder="Example: sarah@engageidentity.com" value="sarah@engageidentity.com" required>
+                        <input type="text" class="form-control" id="sub" name="sub" placeholder="Example: example@example.com" value="example@example.com" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Service Titles</label>
+                    <label>Service Title</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="svc1" name="svc1" placeholder="Example: Amazon" value="Amazon" required>
+                        <input type="text" class="form-control" id="svc1" name="svc1" placeholder="Example: Company Name" value="Company Name" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       <div class="input-group">
-                        <input type="text" class="form-control" id="svc2" name="svc2" placeholder="Example: Amazon Express" value="Amazon Express" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Short Notice Field</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="notice" name="notice" placeholder="Example: http://example.com/notice" value="http://example.com/notice" required>
+                        <input type="text" class="form-control" id="svc2" name="svc2" placeholder="Example: Company Service/Product Name" value="Company Service/Product Name" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
@@ -113,8 +107,16 @@
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label>Link to Short Privacy Notice</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="notice" name="notice" placeholder="Example: http://example.com/notice" value="http://example.com/notice" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                
               <div class="form-group">
-                    <label>Data Controllers</label><br>
+                    <label>Data Controller</label><br>
                     Subject: 
                     <div class="input-group">
                         <input type="text" class="form-control" id="data_controller1" name="data_controller1" placeholder="Example: Server" value="Server" required>
@@ -122,7 +124,7 @@
                       </div><br>
                       Controller: 
                       <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller2" name="data_controller2" placeholder="Example: Amazon Web Services" value="Amazon Web Services" required>
+                        <input type="text" class="form-control" id="data_controller2" name="data_controller2" placeholder="Example: Server Company" value="Server Company" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div><br>
                     Subject: 
@@ -132,7 +134,7 @@
                       </div><br>
                       Controller: 
                       <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller4" name="data_controller4" placeholder="Example: State of Washington" value="State of Washington" required>
+                        <input type="text" class="form-control" id="data_controller4" name="data_controller4" placeholder="Example: US" value="US" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
@@ -174,7 +176,7 @@
                       </div><br>
                       Value: 
                       <div class="input-group">
-                        <input type="text" class="form-control" id="pii_collected2" name="pii_collected2" placeholder="Example: Sarah Squire" value="Sarah Squire" required>
+                        <input type="text" class="form-control" id="pii_collected2" name="pii_collected2" placeholder="Example: Alice" value="Alice" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div><br>
                     Category: 
@@ -184,7 +186,7 @@
                       </div><br>
                       Value: 
                       <div class="input-group">
-                        <input type="text" class="form-control" id="pii_collected4" name="pii_collected4" placeholder="Example: sarah@sarahsquire.org" value="sarah@sarahsquire.org" required>
+                        <input type="text" class="form-control" id="pii_collected4" name="pii_collected4" placeholder="Example: example@example.com" value="example@example.com" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
@@ -201,7 +203,7 @@
 					</div>
                 </div>
                 <div class="form-group" id="context">
-                    <label>OC of data collection</label>
+                    <label>Consent Context</label>
 					<div class="input-group">
 						<button type="button" class="btn btn-add">+ Add New Field</button>
 					</div>
@@ -209,16 +211,15 @@
                 <div class="form-group">
                     <label>Resource Server Identifier</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="aud" name="aud" placeholder="Example: http://engageidentity.com/protected" value="http://engageidentity.com/protected" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
+                        <input type="text" class="form-control" id="aud" name="aud" placeholder="Example: http://example.com/protected" value="http://example.com/protected" required><span class="input-group-addon"></span>
                       </div><br>
                       
                 </div>
                 <div class="form-group">
-                    <label>Scopes</label>
+                    <label>Oauth Scopes</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="scope" name="scope" placeholder="Example: read update" value="read update" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
+                        <input type="text" class="form-control" id="scope" name="scope" placeholder="Example: read update" value="read update" required><span class="input-group-addon"></span>
+                        
                       </div><br>
                       
                 </div>
@@ -246,29 +247,30 @@
             <p id="rjurisdiction" class="rindent">
             </p>
             <p>
-              <button type="button" class="btn btn-info btn-xs">Identification of natural person using any pseudonymous identifiers</button>
+              <button type="button" class="btn btn-info btn-xs">Id of natural person</button>
             </p>
             <p id="rsub" class="rindent">
             </p>
             <p>
-              <button type="button" class="btn btn-info btn-xs">Service Titles</button>
+              <button type="button" class="btn btn-info btn-xs">Service Title</button>
             </p>
             <p id="rsvc1" class="rindent">
             </p>
             <p id="rsvc2" class="rindent">
             </p>
-            <p>
-              <button type="button" class="btn btn-info btn-xs">Short Notice Field</button>
-            </p>
-            <p id="rnotice" class="rindent">
-            </p>
+            
             <p>
               <button type="button" class="btn btn-info btn-xs">Privacy Policy Link</button>
             </p>
             <p id="rpolicy_uri" class="rindent">
             </p>
             <p>
-              <button type="button" class="btn btn-info btn-xs">Data Controllers</button>
+              <button type="button" class="btn btn-info btn-xs">Link to Short Privacy Notice</button>
+            </p>
+            <p id="rnotice" class="rindent">
+            </p>
+            <p>
+              <button type="button" class="btn btn-info btn-xs">Data Controller</button>
             </p>
             <p class="rindent">
               Subject: <span id="rdata_controller1"></span><br>
@@ -316,7 +318,7 @@
             <p id="rsharing" class="rindent">
             </p>
             <p>
-              <button type="button" class="btn btn-info btn-xs">OC of data collection</button>
+              <button type="button" class="btn btn-info btn-xs">Consent Context</button>
             </p>
             <p id="rcontext" class="rindent">
             </p>
@@ -326,7 +328,7 @@
             <p id="raud" class="rindent">
             </p>
             <p>
-              <button type="button" class="btn btn-info btn-xs">Scopes</button>
+              <button type="button" class="btn btn-info btn-xs">Oauth Scopes</button>
             </p>
             <p id="rscope" class="rindent">
             </p>
