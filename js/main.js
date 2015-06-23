@@ -4,6 +4,17 @@ $(document).ready(function() {
 	// prevent accidental form submission on 'enter'
 	$('input,select').keypress(function(event) { return event.keyCode != 13; });
 
+	$('#svc').on('click', '.btn-add', function(event) {
+		event.preventDefault();
+		
+		$('#svc').append('                    <div class="input-group">\n' +
+		'                        <input type="text" class="form-control" placeholder="Example: Company Service/Product Name">\n' +
+		'                        <span class="input-group-btn"><button type="button" class="btn btn-remove">&times;</button></span>\n' +
+		'						</div>');
+		
+		
+	});
+	
 	$('#purpose').on('click', '.btn-add', function(event) {
 		event.preventDefault();
 		
@@ -59,7 +70,7 @@ $(document).ready(function() {
 		var oPost = {};
 		oPost.jurisdiction = $('#jurisdiction').val();
 		oPost.sub = $('#sub').val();
-		oPost.svc = [$('#svc1').val(),$('#svc2').val()];
+		oPost.svc = $('#svc input[type="text"]').map(function() { return $(this).val() } ).get();
 		oPost.notice = $('#notice').val();
 		oPost.policy_uri = $('#policy_uri').val();
 		oPost.data_controller =  {
@@ -104,8 +115,14 @@ $(document).ready(function() {
 
 				$("#rjurisdiction").html(opayload.jurisdiction);
 				$("#rsub").html(opayload.sub);
-				$("#rsvc1").html(opayload.svc[0]);
-				$("#rsvc2").html(opayload.svc[1]);
+				$('#rsvc').empty();
+				if (opayload.svc.length > 0) {
+					$.each(opayload.svc, function(index, value) {
+						$("#rsvc").append('<p>' + value + '</p>');
+					});
+				} else {
+						$("#rsvc").append('<p>None</p>');
+				}
 				$("#rnotice").html(opayload.notice);
 				$("#rpolicy_uri").html(opayload.policy_uri);
 				$("#rdata_controller_on_behalf").html((opayload.data_controller['on_behalf'] ? 'yes' : 'no'));
@@ -120,6 +137,7 @@ $(document).ready(function() {
 				var rconsent_payload3 = Object.keys(opayload.consent_payload)[1];
 				$("#rconsent_payload3").html(rconsent_payload3);
 				$("#rconsent_payload4").html(opayload.consent_payload[rconsent_payload3]);
+				$('#rpurpose').empty();
 				if (opayload.purpose.length > 0) {
 					$.each(opayload.purpose, function(index, value) {
 						$("#rpurpose").append('<p>' + value + '</p>');
@@ -133,6 +151,7 @@ $(document).ready(function() {
 				var rpii_collected3 = Object.keys(opayload.pii_collected)[1];
 				$("#rpii_collected3").html(rpii_collected3);
 				$("#rpii_collected4").html(opayload.pii_collected[rpii_collected3]);
+				$('#rsensitive').empty();
 				if (opayload.sensitive.length > 0) {
 					$.each(opayload.sensitive, function(index, value) {
 						$("#rsensitive").append('<p>' + value + '</p>');
@@ -140,6 +159,7 @@ $(document).ready(function() {
 				} else {
 					$("#rsensitive").append('<p>None</p>');
 				}
+				$('#rsharing').empty();
 				if (opayload.sharing.length > 0) {
 					$.each(opayload.sharing, function(index, value) {
 						$("#rsharing").append('<p>' + value + '</p>');
@@ -147,6 +167,7 @@ $(document).ready(function() {
 				} else {
 					$("#rsharing").append('<p>None</p>');
 				}
+				$('#rcontext').empty();
 				if (opayload.context.length > 0) {
 					$.each(opayload.context, function(index, value) {
 						$("#rcontext").append('<p>' + value + '</p>');

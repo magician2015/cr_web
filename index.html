@@ -53,8 +53,8 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Welcome!</h1>
-        <p>This form calls an API that receives consent record data.  It also renders a receipt and generates a signed receipt in a JSON Web Token Format that can be downloaded. </p>
+        <h1>Example Consent Receipt Generator</h1>
+        <p>This page demonstrates a Consent Receipt generation function. The data in the form is sent to an API that generates a signed receipt in a JSON Web Token Format. This page then renders the resulting signed receipt and lets you download the raw receipt object.</p>
         <div class="cis"> 
           <img id="cis" src="img/cis.png" />
         </div>
@@ -89,16 +89,11 @@
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="svc">
                     <label>Service Title</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="svc1" name="svc1" placeholder="Example: Company Name" value="Company Name" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
-                      </div><br>
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="svc2" name="svc2" placeholder="Example: Company Service/Product Name" value="Company Service/Product Name" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div>
+					<div class="input-group">
+						<button type="button" class="btn btn-add">+ Add New Field</button>
+					</div>
                 </div>
                 <div class="form-group">
                     <label>Privacy Policy Link</label>
@@ -263,9 +258,7 @@
             <p>
               <button type="button" class="btn btn-info btn-xs">Service Title</button>
             </p>
-            <p id="rsvc1" class="rindent">
-            </p>
-            <p id="rsvc2" class="rindent">
+            <p id="rsvc" class="rindent">
             </p>
             
             <p>
