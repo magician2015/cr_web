@@ -1,11 +1,30 @@
 
 $(document).ready(function() {
 
-  $('#submit').on('click', function(event) {
+	$('#purpose').on('click', '.btn-add', function(event) {
+		event.preventDefault();
+		
+		$('#purpose').append('                    <div class="input-group">\n' +
+		'                        <input type="text" class="form-control" placeholder="Example: marketing">\n' +
+		'                        <span class="input-group-btn"><button type="button" class="btn btn-remove">&times;</button></span>\n' +
+		'						</div>');
+		
+		
+	});
+	
+	$('#purpose').on('click', '.btn-remove', function(event) {
+		event.preventDefault();
+		
+		$(event.currentTarget.parentElement.parentElement).remove();
+		
+	});
+	
+	$('#submit').on('click', function(event) {
 	  
-      $('html, body').animate({
-             scrollTop: $(".receipt").offset().top - 55
-         }, 1000);
+	event.preventDefault();
+    $('html, body').animate({
+           scrollTop: $(".receipt").offset().top - 55
+    	}, 1000);
    
 	  
 	  
@@ -21,7 +40,7 @@ $(document).ready(function() {
     oPost.consent_payload = {};
     oPost.consent_payload[$('#consent_payload1').val()] = $('#consent_payload2').val();
     oPost.consent_payload[$('#consent_payload3').val()] = $('#consent_payload4').val();
-    oPost.purpose = [$('#purpose1').val(),$('#purpose2').val()];
+    oPost.purpose = $('#purpose input[type="text"]').map(function() { return $(this).val() } ).get()
     oPost.pii_collected = {};
     oPost.pii_collected[$('#pii_collected1').val()] = $('#pii_collected2').val();
     oPost.pii_collected[$('#pii_collected3').val()] = $('#pii_collected4').val();
@@ -68,8 +87,9 @@ $(document).ready(function() {
     var rconsent_payload3 = Object.keys(opayload.consent_payload)[1];
     $("#rconsent_payload3").html(rconsent_payload3);
     $("#rconsent_payload4").html(opayload.consent_payload[rconsent_payload3]);
-    $("#rpurpose1").html(opayload.purpose[0]);
-    $("#rpurpose2").html(opayload.purpose[1]);
+	$.each(opayload.purpose, function(index, value) {
+	    $("#rpurpose").append('<p>' + value + '</p>');
+	});
     var rpii_collected1 = Object.keys(opayload.pii_collected)[0];
     $("#rpii_collected1").html(rpii_collected1);
     $("#rpii_collected2").html(opayload.pii_collected[rpii_collected1]);

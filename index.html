@@ -159,16 +159,11 @@
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="purpose">
                     <label>Purposes</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="purpose1" name="purpose1" placeholder="Example: marketing" value="marketing" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
-                      </div><br>
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="purpose2" name="purpose2" placeholder="Example: research" value="research" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div>
+					<div class="input-group">
+						<button type="button" class="btn btn-add">+ Add New Field</button>
+					</div>
                 </div>
                 <div class="form-group">
                     <label>PII Collected</label><br>
@@ -312,9 +307,7 @@
             <p>
               <button type="button" class="btn btn-info btn-xs">Purposes</button>
             </p>
-            <p id="rpurpose1" class="rindent">
-            </p>
-            <p id="rpurpose2" class="rindent">
+            <p id="rpurpose" class="rindent">
             </p>
             <p>
               <button type="button" class="btn btn-info btn-xs">PII Collected</button>
