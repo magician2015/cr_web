@@ -117,35 +117,33 @@
                 
               <div class="form-group">
                     <label>Data Controller</label><br>
-                    is acting on behalf of company
                     <div class="input-group">
-                        <input type="checkbox" id="data_controller1" name="data_controller1" value="yes" checked> yes<br>
-  <input type="checkbox" id="data_controller1" name="data_controller1" value="no" > no<br>
+                        <input type="checkbox" id="data_controller_on_behalf"> Is acting on behalf of company taking consent?<br>
                       </div><br>
                       Contact Name 
                       <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller2" name="data_controller2" placeholder="Example: Contact Name" value="Contact Name" required>
+                        <input type="text" class="form-control" id="data_controller_contact" placeholder="Example: Contact Name" value="Contact Name" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div><br>
                     Company Name
                     <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller3" name="data_controller3" placeholder="Example: Company Name" value="Company Name" required>
+                        <input type="text" class="form-control" id="data_controller_company" placeholder="Example: Company Name" value="Company Name" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
                       </div><br>
                       Address
                       <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller4" name="data_controller4" placeholder="Example: Address" value="Address" required>
+                        <input type="text" class="form-control" id="data_controller_address" placeholder="Example: Address" value="Address" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div><br>
                       Contact Email
                       <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller5" name="data_controller4" placeholder="Example: example@example.com" value="example@example.com" required>
+                        <input type="text" class="form-control" id="data_controller_email" placeholder="Example: example@example.com" value="example@example.com" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                     <br>
                       Phone Number
                       <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller6" name="data_controller4" placeholder="Example: 00-000-000-0000" value="00-000-000-0000" required>
+                        <input type="text" class="form-control" id="data_controller_phone" placeholder="Example: 00-000-000-0000" value="00-000-000-0000" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
@@ -284,17 +282,17 @@
               <button type="button" class="btn btn-info btn-xs">Data Controller</button>
             </p>
             <p class="rindent">
-              is acting on behalf of company: <span id="rdata_controller1"></span><br>
+              is acting on behalf of company: <span id="rdata_controller_on_behalf"></span><br>
 
-              Contact Name: <span id="rdata_controller2"></span><br>
+              Contact Name: <span id="rdata_controller_contact"></span><br>
   
-              Company Name: <span id="rdata_controller3"></span><br>
+              Company Name: <span id="rdata_controller_company"></span><br>
   
-              Address: <span id="rdata_controller4"></span><br>
+              Address: <span id="rdata_controller_address"></span><br>
   
-              Contact Email: <span id="rdata_controller5"></span><br>
+              Contact Email: <span id="rdata_controller_email"></span><br>
   
-              Phone Number: <span id="rdata_controller6"></span><br>
+              Phone Number: <span id="rdata_controller_phone"></span><br>
              
             </p>
             <p>

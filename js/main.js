@@ -62,7 +62,14 @@ $(document).ready(function() {
 		oPost.svc = [$('#svc1').val(),$('#svc2').val()];
 		oPost.notice = $('#notice').val();
 		oPost.policy_uri = $('#policy_uri').val();
-		oPost.data_controller =  [$('#data_controller1').val(),$('#data_controller2').val(),$('#data_controller3').val(),$('#data_controller4').val(),$('#data_controller5').val(),$('#data_controller6').val()];
+		oPost.data_controller =  {
+			'on_behalf': $('#data_controller_on_behalf').is(':checked'),
+			'contact': $('#data_controller_contact').val(),
+			'company': $('#data_controller_company').val(),
+			'address': $('#data_controller_address').val(),
+			'email': $('#data_controller_email').val(),
+			'phone': $('#data_controller_phone').val()
+		};
 		oPost.consent_payload = {};
 		oPost.consent_payload[$('#consent_payload1').val()] = $('#consent_payload2').val();
 		oPost.consent_payload[$('#consent_payload3').val()] = $('#consent_payload4').val();
@@ -101,12 +108,12 @@ $(document).ready(function() {
 				$("#rsvc2").html(opayload.svc[1]);
 				$("#rnotice").html(opayload.notice);
 				$("#rpolicy_uri").html(opayload.policy_uri);
-				$("#rdata_controller1").html(opayload.data_controller[0]);
-				$("#rdata_controller2").html(opayload.data_controller[1]);
-				$("#rdata_controller3").html(opayload.data_controller[2]);
-				$("#rdata_controller4").html(opayload.data_controller[3]);
-				$("#rdata_controller5").html(opayload.data_controller[4]);
-				$("#rdata_controller6").html(opayload.data_controller[5]);
+				$("#rdata_controller_on_behalf").html((opayload.data_controller['on_behalf'] ? 'yes' : 'no'));
+				$("#rdata_controller_contact").html(opayload.data_controller['contact']);
+				$("#rdata_controller_company").html(opayload.data_controller['company']);
+				$("#rdata_controller_address").html(opayload.data_controller['address']);
+				$("#rdata_controller_email").html(opayload.data_controller['email']);
+				$("#rdata_controller_phone").html(opayload.data_controller['phone']);
 				var rconsent_payload1 = Object.keys(opayload.consent_payload)[0];
 				$("#rconsent_payload1").html(rconsent_payload1);
 				$("#rconsent_payload2").html(opayload.consent_payload[rconsent_payload1]);
