@@ -120,24 +120,40 @@ $(document).ready(function() {
 				var rconsent_payload3 = Object.keys(opayload.consent_payload)[1];
 				$("#rconsent_payload3").html(rconsent_payload3);
 				$("#rconsent_payload4").html(opayload.consent_payload[rconsent_payload3]);
-				$.each(opayload.purpose, function(index, value) {
-					$("#rpurpose").append('<p>' + value + '</p>');
-				});
+				if (opayload.purpose.length > 0) {
+					$.each(opayload.purpose, function(index, value) {
+						$("#rpurpose").append('<p>' + value + '</p>');
+					});
+				} else {
+						$("#rpurpose").append('<p>None</p>');
+				}
 				var rpii_collected1 = Object.keys(opayload.pii_collected)[0];
 				$("#rpii_collected1").html(rpii_collected1);
 				$("#rpii_collected2").html(opayload.pii_collected[rpii_collected1]);
 				var rpii_collected3 = Object.keys(opayload.pii_collected)[1];
 				$("#rpii_collected3").html(rpii_collected3);
 				$("#rpii_collected4").html(opayload.pii_collected[rpii_collected3]);
-				$.each(opayload.sensitive, function(index, value) {
-					$("#rsensitive").append('<p>' + value + '</p>');
-				});
-				$.each(opayload.sharing, function(index, value) {
-					$("#rsharing").append('<p>' + value + '</p>');
-				});
-				$.each(opayload.context, function(index, value) {
-					$("#rcontext").append('<p>' + value + '</p>');
-				});
+				if (opayload.sensitive.length > 0) {
+					$.each(opayload.sensitive, function(index, value) {
+						$("#rsensitive").append('<p>' + value + '</p>');
+					});
+				} else {
+					$("#rsensitive").append('<p>None</p>');
+				}
+				if (opayload.sharing.length > 0) {
+					$.each(opayload.sharing, function(index, value) {
+						$("#rsharing").append('<p>' + value + '</p>');
+					});
+				} else {
+					$("#rsharing").append('<p>None</p>');
+				}
+				if (opayload.context.length > 0) {
+					$.each(opayload.context, function(index, value) {
+						$("#rcontext").append('<p>' + value + '</p>');
+					});
+				} else {
+					$("#rcontext").append('<p>None</p>');
+				}
 				$("#raud").html(opayload.aud);
 				$("#rscope").html(opayload.scopes);
 				$("#riss").html(opayload.iss);
