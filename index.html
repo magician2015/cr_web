@@ -188,38 +188,23 @@
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="sensitive">
                     <label>Sensitive Information</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="sensitive1" name="sensitive1" placeholder="Example: http://example.com/medical" value="http://example.com/medical" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
-                      </div><br>
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="sensitive2" name="sensitive2" placeholder="Example: http://example.com/financial" value="http://example.com/financial" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div>
-                  </div>
-                    <div class="form-group">
-                    <label>3rd party sharing of personal information</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="sharing1" name="sharing1" placeholder="Example: contact information" value="contact information" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
-                      </div><br>
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="sharing2" name="sharing2" placeholder="Example: demographic information" value="demographic information" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div>
+					<div class="input-group">
+						<button type="button" class="btn btn-add">+ Add New Field</button>
+					</div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="sharing">
+                    <label>3rd party sharing of personal information</label>
+					<div class="input-group">
+						<button type="button" class="btn btn-add">+ Add New Field</button>
+					</div>
+                </div>
+                <div class="form-group" id="context">
                     <label>OC of data collection</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="context1" name="context1" placeholder="Example: active privacy policy consent" value="active privacy policy consent" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
-                      </div><br>
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="context2" name="context2" placeholder="Example: passive terms of service consent" value="passive terms of service consent" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div>
+					<div class="input-group">
+						<button type="button" class="btn btn-add">+ Add New Field</button>
+					</div>
                 </div>
                 <div class="form-group">
                     <label>Resource Server Identifier</label>
@@ -323,23 +308,17 @@
             <p>
               <button type="button" class="btn btn-info btn-xs">Sensitive Information</button>
             </p>
-            <p id="rsensitive1" class="rindent">
-            </p>
-            <p id="rsensitive2" class="rindent">
+            <p id="rsensitive" class="rindent">
             </p>
             <p>
               <button type="button" class="btn btn-info btn-xs">3rd party sharing of personal information</button>
             </p>
-            <p id="rsharing1" class="rindent">
-            </p>
-            <p id="rsharing2" class="rindent">
+            <p id="rsharing" class="rindent">
             </p>
             <p>
               <button type="button" class="btn btn-info btn-xs">OC of data collection</button>
             </p>
-            <p id="rcontext1" class="rindent">
-            </p>
-            <p id="rcontext2" class="rindent">
+            <p id="rcontext" class="rindent">
             </p>
             <p>
               <button type="button" class="btn btn-info btn-xs">Resource Server Identifier</button>

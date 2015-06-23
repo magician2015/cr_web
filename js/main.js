@@ -1,5 +1,8 @@
 
 $(document).ready(function() {
+	
+	// prevent accidental form submission on 'enter'
+	$('input,select').keypress(function(event) { return event.keyCode != 13; });
 
 	$('#purpose').on('click', '.btn-add', function(event) {
 		event.preventDefault();
@@ -12,7 +15,32 @@ $(document).ready(function() {
 		
 	});
 	
-	$('#purpose').on('click', '.btn-remove', function(event) {
+	$('#sensitive').on('click', '.btn-add', function(event) {
+		event.preventDefault();
+		$('#sensitive').append('                    <div class="input-group">\n' +
+'                        <input type="text" class="form-control" placeholder="Example: http://example.com/medical">\n' +
+'                        <span class="input-group-btn"><button type="button" class="btn btn-remove">&times;</button></span> \n' +
+'						</div>');
+	});
+	
+	$('#sharing').on('click', '.btn-add', function(event) {
+		event.preventDefault();
+		$('#sharing').append('                    <div class="input-group">\n' +
+'                        <input type="text" class="form-control" placeholder="Example: contact information">\n' +
+'                        <span class="input-group-btn"><button type="button" class="btn btn-remove">&times;</button></span> \n' +
+'						</div>');
+	});
+
+	$('#context').on('click', '.btn-add', function(event) {
+		event.preventDefault();
+		$('#context').append('                    <div class="input-group">\n' +
+'                        <input type="text" class="form-control" placeholder="Example: active privacy policy consent">\n' +
+'                        <span class="input-group-btn"><button type="button" class="btn btn-remove">&times;</button></span> \n' +
+'						</div>');
+	});
+
+
+	$(document).on('click', '.btn-remove', function(event) {
 		event.preventDefault();
 		
 		$(event.currentTarget.parentElement.parentElement).remove();
@@ -40,13 +68,13 @@ $(document).ready(function() {
     oPost.consent_payload = {};
     oPost.consent_payload[$('#consent_payload1').val()] = $('#consent_payload2').val();
     oPost.consent_payload[$('#consent_payload3').val()] = $('#consent_payload4').val();
-    oPost.purpose = $('#purpose input[type="text"]').map(function() { return $(this).val() } ).get()
+    oPost.purpose = $('#purpose input[type="text"]').map(function() { return $(this).val() } ).get();
     oPost.pii_collected = {};
     oPost.pii_collected[$('#pii_collected1').val()] = $('#pii_collected2').val();
     oPost.pii_collected[$('#pii_collected3').val()] = $('#pii_collected4').val();
-    oPost.sensitive = [$('#sensitive1').val(),$('#sensitive2').val()];
-    oPost.sharing = [$('#sharing1').val(),$('#sharing2').val()];
-    oPost.context = [$('#context1').val(),$('#context2').val()];
+    oPost.sensitive = $('#sensitive input[type="text"]').map(function() { return $(this).val() } ).get();
+    oPost.sharing = $('#sharing input[type="text"]').map(function() { return $(this).val() } ).get();
+    oPost.context = $('#context input[type="text"]').map(function() { return $(this).val() } ).get()
     oPost.aud = $('#aud').val();
     oPost.scopes = $('#scope').val();
 
@@ -96,12 +124,15 @@ $(document).ready(function() {
     var rpii_collected3 = Object.keys(opayload.pii_collected)[1];
     $("#rpii_collected3").html(rpii_collected3);
     $("#rpii_collected4").html(opayload.pii_collected[rpii_collected3]);
-    $("#rsensitive1").html(opayload.sensitive[0]);
-    $("#rsensitive2").html(opayload.sensitive[1]);
-    $("#rsharing1").html(opayload.sharing[0]);
-    $("#rsharing2").html(opayload.sharing[1]);
-    $("#rcontext1").html(opayload.context[0]);
-    $("#rcontext2").html(opayload.context[1]);
+	$.each(opayload.sensitive, function(index, value) {
+	    $("#rsensitive").append('<p>' + value + '</p>');
+	});
+	$.each(opayload.sharing, function(index, value) {
+	    $("#rsharing").append('<p>' + value + '</p>');
+	});
+	$.each(opayload.context, function(index, value) {
+	    $("#rcontext").append('<p>' + value + '</p>');
+	});
     $("#raud").html(opayload.aud);
     $("#rscope").html(opayload.scopes);
     $("#riss").html(opayload.iss);
