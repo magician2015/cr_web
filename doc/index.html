@@ -126,8 +126,71 @@
 <tr>
     <td><code>data_controller</code></td>
     <td>object</td>
-    <td>The identity and company of the data controller and any party
-nominated to be data controller on behalf of org</td>
+    <td>
+    <p>The identity and company of the data controller and any party
+nominated to be data controller on behalf of org</p>
+      <div class="well">
+          <p>The object contains information of the data controller in the following fields:</p>
+      
+                        <table class="table table-condensed table-hover">
+                    
+                    <thead>
+                      <tr>
+                      <th>Field Name</th>
+                        <th>Data Type</th>
+                        <th>Description</th>
+                        <th>Example Input</th>
+                        <th>Required</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      <tr>
+                        <td><code>on_behalf</code></td>
+                        <td>boolean.</td>
+                        <td>acting on behalf of an organization?</td>
+                        <td><code>true</code></td>
+                        <td></td>
+                    </tr>
+                      <tr>
+                        <td><code>contact</code></td>
+                        <td>string.</td>
+                        <td>person to contact</td>
+                        <td><code>Jon Doe</code></td>
+                        <td></td>
+                    </tr>
+                      <tr>
+                        <td><code>company</code></td>
+                        <td>string.</td>
+                        <td>company name</td>
+                        <td><code>Data Controller Inc.</code></td>
+                        <td></td>
+                    </tr>
+                      <tr>
+                        <td><code>address</code></td>
+                        <td>string.</td>
+                        <td>physical address</td>
+                        <td><code>123 Main St., Anywhere</code></td>
+                        <td></td>
+                    </tr>
+                      <tr>
+                        <td><code>email</code></td>
+                        <td>string. Email address</td>
+                        <td>contact email address</td>
+                        <td><code>jon@datacontroller.com</code></td>
+                        <td></td>
+                    </tr>
+                      <tr>
+                        <td><code>phone</code></td>
+                        <td>string. Phone number</td>
+                        <td>contact phone number</td>
+                        <td><code>00-000-000-0000</code></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                    </table>
+            </div>
+</td>
     <td><code>{"on_behalf": true, "contact": "Dave Controller", "company": "Data Controller Inc.", "address": "123 St., Place", "email": "dave@datacontroller.com", "phone": "00-123-341-2351"}
  	</code></td>
  	<td>&#10003;</td>
