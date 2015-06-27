@@ -52,7 +52,7 @@
       <div class="container">
         <h1>Consent Receipt API</h1>
         <p>This server provides a consent receipt generation API. The API consists of a single endpoint:</p>
-        <p><code>http://www.consentreceipt.com/mvcr/api</code></p>
+        <p><code>http://www.consentreceipt.org/mvcr/api</code></p>
         <p>This endpoint accepts HTTP <code>POST</code> requests with <a href="#input-object">input</a> in the form of JSON (<code>application/json</code>) documents and <a href="output-fields">output</a> in the form of a <a href="digital-signature">signed</a> JSON Web Token (<code>application/jwt</code>).</p>
       </div>
     </div>
@@ -94,30 +94,35 @@
     <td>string. ISO two-letter country code if applicable, otherwise free text</td>
     <td>this is the location of processing</td>
     <td><code>US</code></td>
+    <td>&#10003;</td>
 </tr>
 <tr>
     <td><code>sub</code></td>
     <td>string.</td>
     <td>Subject provided identifier, usually email addressClaim, defined/namespaced by the issuer</td>
     <td><code>example@example.com</code></td>
+    <td>&#10003;</td>
 </tr>
 <tr>
     <td><code>svc</code></td>
     <td>array of strings.</td>
     <td>this is global context for consent</td>
     <td><code>["Company Name" , "Service Name"]</code></td>
+    <td>&#10003;</td>
 </tr>
 <tr>
     <td><code>notice</code></td>
     <td>string. HTTP URL</td>
     <td>Link to the short notice enables usability and layered policy. to provide enhanced transparency about data collection and information sharing practices</td>
     <td><code>http://example.com/notice</code></td>
+    <td>&#10003;</td>
 </tr>
 <tr>
     <td><code>policy_uri</code></td>
     <td>string. HTTP URL</td>
     <td>the internet and immediately accessible privacy policy of the service referred to by the receipt</td>
     <td><code>http://example.com/privacy</code></td>
+    <td>&#10003;</td>
 </tr>
 <tr>
     <td><code>data_controller</code></td>
@@ -126,6 +131,7 @@
 nominated to be data controller on behalf of org</td>
     <td><code>{"on_behalf": true, "contact": "Dave Controller", "company": "Data Controller Inc.", "address": "123 St., Place", "email": "dave@datacontroller.com", "phone": "00-123-341-2351"}
  	</code></td>
+ 	<td>&#10003;</td>
 </tr>
 <tr>
     <td><code>consent_payload</code></td>
@@ -133,6 +139,7 @@ nominated to be data controller on behalf of org</td>
     <td>Examples include: Device Identifier, UID, IP Address, Browser Fingerprint, DNT signal client header, .Mobile device id</td>
     <td><code>{"privacy policy" : "agree","ToS" : "agree"}
  	</code></td>
+ 	<td>&#10003;</td>
 </tr>
 <tr>
     <td><code>purpose</code></td>
@@ -142,6 +149,7 @@ nominated to be data controller on behalf of org</td>
 list of normative values in a global registry (services need to map specific actions to things in the registry -- should we require services to document these mappings?)</td>
     <td><code>["marketing","research"]
  	</code></td>
+ 	<td>&#10003;</td>
 </tr>
 <tr>
     <td><code>pii_collected</code></td>
@@ -149,18 +157,21 @@ list of normative values in a global registry (services need to map specific act
     <td>Personal information collected in relation to, or adjacent of purposes specified</td>
     <td><code>{"name" : "Example Example","email" : "example@example.com"}
  	</code></td>
+ 	<td>&#10003;</td>
 </tr>
 <tr>
     <td><code>sensitive</code></td>
     <td>array of strings.</td>
     <td>What is determined to be personal information can be from a big list of all defined personal information categories from all jurisdictions. ( this indicates that it is possible depending on where parties are that this is sensitive)</td>
     <td><code>["http://example.com/medical","http://example.com/financial"]</code></td>
+    <td>&#10003;</td>
 </tr>
 <tr>
     <td><code>sharing</code></td>
     <td>array of strings.</td>
     <td>This refers to the sharing of personal information collected about the individual, with another external party by the service provider, bound under the privacy policy and terms.</td>
     <td><code>["contact information","demographic information"]</code></td>
+    <td>&#10003;</td>
 </tr>
 <tr>
     <td><code>context</code></td>
@@ -169,18 +180,21 @@ list of normative values in a global registry (services need to map specific act
 
 set of registry values?</td>
     <td><code>["active privacy policy consent","passive terms of service consent"]</code></td>
+    <td>&#10003;</td>
 </tr>
 <tr>
     <td><code>aud</code></td>
     <td>string. HTTP URL</td>
-    <td>URI that identifies the target service of this consent</td>
+    <td>Audience URI that identifies the target service of this consent</td>
     <td><code>http://engageidentity.com/protected</code></td>
+    <td></td>
 </tr>
 <tr>
     <td><code>scopes</code></td>
-    <td>string.</td>
+    <td>string. space separated string values</td>
     <td>What you’re allowed to do on the service (these can be tied to legal / business / technical layers)</td>
     <td><code>read update</code></td>
+    <td></td>
 </tr>
 
 </tbody>
@@ -214,7 +228,7 @@ set of registry values?</td>
     <td><code>iss</code></td>
     <td>string. HTTPS URL</td>
     <td>this is the location of processing</td>
-    <td><code>https://www.consentreceipt.org/</code></td>
+    <td><code>http://www.consentreceipt.org/</code></td>
   </tr>
   <tr>
     <td><code>jti</code></td>
@@ -235,7 +249,7 @@ set of registry values?</td>
 </div>
 </div>
 
-<div class="row-fluid" id="output-fields">
+<div class="row-fluid" id="digital-signature">
 
 <div class="col-md-10 col-md-offset-1">
 
@@ -243,7 +257,9 @@ set of registry values?</td>
 
 <h3>Digital signature information</h3>
 
-<p></p>
+<p>The output JWT is signed using the <code>RS256</code> algorithm defined in JSON Web Signatures. The server's public key is published in JSON Web Key format at:</p>
+
+<p><code><a href="http://www.consentreceipt.org/api/jwk">http://www.consentreceipt.org/api/jwk</a></code></p>
 
 </div>
 
