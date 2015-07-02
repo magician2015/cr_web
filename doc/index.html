@@ -334,6 +334,110 @@ set of registry values?</td>
 
 </div>
 </div>
+
+<div class="row-fluid">
+
+<div class="col-md-10 col-md-offset-1">
+
+<div class="well">
+
+<h3 id="example">Example</h3>
+
+<p>An example input to the API is the following JSON object:</p>
+
+<p><pre>
+{
+ 
+ 	"jurisdiction" : "US",
+ 	"sub" : "sarah@example.com" ,
+ 	"svc" : ["amazon","amazon express"] ,
+ 	"notice" : "http://example.com/notice" ,
+ 	"policy_uri" : "http://example.com/policy" ,
+ 	"data_controller" : {"on_behalf": true, "contact": "Dave Controller", "company": "Data Controller Inc.", "address": "123 St., Place", "email": "dave@datacontroller.com", "phone": "00-123-341-2351"},
+ 	"consent_payload" : {"privacy policy" : "agree","ToS" : "agree"} ,
+ 	"purpose" : ["marketing","research"] ,
+	"pii_collected" : {"name" : "Sarah Squire","email" : "sarah@engageidentity.com"} ,
+	"sensitive" : ["http://example.com/medical","http://example.com/financial"] ,
+	"sharing" : ["contact information","demographic information"] ,
+	"context" : ["active privacy policy consent","passive terms of service consent"] ,
+	"aud" : "http://engageidentity.com/protected" ,
+	"scopes" : "read update"
+}
+</pre></p>
+
+<p>This produces output like the following signed JWT:</p>
+
+<p><code style="word-wrap: break-word; overflow-wrap: break-word;">
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdXJpc2RpY3Rpb24iOiJVUyIsInN1YiI6InNhcmFoQGV4YW1wbGUuY29tIiwic3ZjIjpbImFtYXpvbiIsImFtYXpvbiBleHByZXNzIl0sIm5vdGljZSI6Imh0dHA6Ly9leGFtcGxlLmNvbS9ub3RpY2UiLCJwb2xpY3lfdXJpIjoiaHR0cDovL2V4YW1wbGUuY29tL3BvbGljeSIsImRhdGFfY29udHJvbGxlciI6eyJvbl9iZWhhbGYiOnRydWUsImNvbnRhY3QiOiJEYXZlIENvbnRyb2xsZXIiLCJjb21wYW55IjoiRGF0YSBDb250cm9sbGVyIEluYy4iLCJhZGRyZXNzIjoiMTIzIFN0LiwgUGxhY2UiLCJlbWFpbCI6ImRhdmVAZGF0YWNvbnRyb2xsZXIuY29tIiwicGhvbmUiOiIwMC0xMjMtMzQxLTIzNTEifSwiY29uc2VudF9wYXlsb2FkIjp7InByaXZhY3kgcG9saWN5IjoiYWdyZWUiLCJUb1MiOiJhZ3JlZSJ9LCJwdXJwb3NlIjpbIm1hcmtldGluZyIsInJlc2VhcmNoIl0sInBpaV9jb2xsZWN0ZWQiOnsibmFtZSI6IlNhcmFoIFNxdWlyZSIsImVtYWlsIjoic2FyYWhAZW5nYWdlaWRlbnRpdHkuY29tIn0sInNlbnNpdGl2ZSI6WyJodHRwOi8vZXhhbXBsZS5jb20vbWVkaWNhbCIsImh0dHA6Ly9leGFtcGxlLmNvbS9maW5hbmNpYWwiXSwic2hhcmluZyI6WyJjb250YWN0IGluZm9ybWF0aW9uIiwiZGVtb2dyYXBoaWMgaW5mb3JtYXRpb24iXSwiY29udGV4dCI6WyJhY3RpdmUgcHJpdmFjeSBwb2xpY3kgY29uc2VudCIsInBhc3NpdmUgdGVybXMgb2Ygc2VydmljZSBjb25zZW50Il0sImF1ZCI6Imh0dHA6Ly9lbmdhZ2VpZGVudGl0eS5jb20vcHJvdGVjdGVkIiwic2NvcGVzIjoicmVhZCB1cGRhdGUiLCJqdGkiOiI5OGI1Yzg5OTVkMzExNjI0ZGI0M2U0Zjk2OGJkYmYyZWMzYTIxNDFhNDU4NTM0ODJiMGNiMTFjOGRmMWZjNzkzMDkyYjExOTJjYzRlZmE4ZmRlZjFkMGNlZTA4ZGFhMDkwMTlkMTkxYjlmYzY2NGFiOTg3OWQwYWE4OGVlNGNmNCIsImlhdCI6MTQzNTg1NTI0MzQ3MSwiaXNzIjoiaHR0cDovL3d3dy5jb25zZW50cmVjZWlwdC5vcmcifQ.MFXoyWoFD-UQRhErGBteXRLHgdB2Rp-EABXIb3gLGU0lv_U-B87ks4GaJd4jLmsMpTvLRKaPlE81xDVirtw9DTFQ79UMKZKyKMMpJSltLXVgWzoEmt_7cxeQPV0ISO1djemYmkENO3tN-zhJbYlWeHl3iamFAsXXZZ4rkfRX9i2LTYpIGA5ecdQpqLQ7YimaRta7hTnCNXZs_x57s7uYCLwu--Q1EQKhAgpft4GYI9ziAiTn5KYJdyC6Rdcba5N2NnQzffl0_RhAiCuo9pvcInL3IK6Xf3c-R9XLW_QdZj0SLBk0_Gn2S6t6BAKhAYWJL687KZ_ESXziPXi7TIf_nA	
+</code></p>
+
+<p>The header portion of the JWT contains:</p>
+
+<p><pre>
+{
+  "alg": "RS256",
+  "typ": "JWT"
+}
+</pre></p>
+
+<p>The payload portion of the JWT contains:</p>
+
+<p><pre>
+{
+  "jurisdiction": "US",
+  "sub": "sarah@example.com",
+  "svc": [
+    "amazon",
+    "amazon express"
+  ],
+  "notice": "http://example.com/notice",
+  "policy_uri": "http://example.com/policy",
+  "data_controller": {
+    "on_behalf": true,
+    "contact": "Dave Controller",
+    "company": "Data Controller Inc.",
+    "address": "123 St., Place",
+    "email": "dave@datacontroller.com",
+    "phone": "00-123-341-2351"
+  },
+  "consent_payload": {
+    "privacy policy": "agree",
+    "ToS": "agree"
+  },
+  "purpose": [
+    "marketing",
+    "research"
+  ],
+  "pii_collected": {
+    "name": "Sarah Squire",
+    "email": "sarah@engageidentity.com"
+  },
+  "sensitive": [
+    "http://example.com/medical",
+    "http://example.com/financial"
+  ],
+  "sharing": [
+    "contact information",
+    "demographic information"
+  ],
+  "context": [
+    "active privacy policy consent",
+    "passive terms of service consent"
+  ],
+  "aud": "http://engageidentity.com/protected",
+  "scopes": "read update",
+  "jti": "98b5c8995d311624db43e4f968bdbf2ec3a2141a45853482b0cb11c8df1fc793092b1192cc4efa8fdef1d0cee08daa09019d191b9fc664ab9879d0aa88ee4cf4",
+  "iat": 1435855243471,
+  "iss": "http://www.consentreceipt.org"
+}	
+</pre></p>
+
+</div>
+
+</div>
+</div>
+
+
       <footer>
      
     </footer>
