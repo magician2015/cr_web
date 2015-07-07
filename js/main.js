@@ -98,7 +98,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			type: "POST",
-			url: "http://www.consentreceipt.org/api/mvcr",
+			url: "http://api.consentreceipt.org/api/mvcr",
 			data: JSON.stringify(oPost),
 			contentType : "application/json", 
 			success: function (data) {
@@ -198,7 +198,7 @@ $(document).ready(function() {
 				var jwt = data;
 				$.ajax({
 					type: "GET",
-					url: "http://www.consentreceipt.org/api/jwk",
+					url: "http://api.consentreceipt.org/api/jwk",
 					data: "json",
 					success: function(data) {
 						console.log(data);
