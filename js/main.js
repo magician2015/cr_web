@@ -178,7 +178,8 @@ $(document).ready(function() {
 				$("#raud").html(opayload.aud);
 				$("#rscope").html(opayload.scopes);
 				$("#riss").html(opayload.iss);
-				var iat = new Date(opayload.iat);
+				var iat = opayload.iat*1000;
+				iat = new Date(iat);
 				$("#riat").html(iat);
 				$("#rjti").html(opayload.jti);
 
