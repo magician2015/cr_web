@@ -4,6 +4,33 @@ $(document).ready(function() {
 	// prevent accidental form submission on 'enter'
 	$('input,select').keypress(function(event) { return event.keyCode != 13; });
 
+	$(".js-example-tags").select2({
+	  tags: ["CISWG Membership","Join", "Bob’s store", "delivery"]
+	});
+
+	$(".purpose_item").select2({
+		createSearchChoice: function(term, data){
+			if($(data).filter(function(){
+				return this.text.localeCompare(term) === 0;
+			}).length === 0){
+				return {
+					id: term,
+					text: term
+				};
+			};
+		},
+		placeholder: "Choose or enter your purpose",
+		multiple: false,
+	  	data: [
+		  	{id: "core_function", text: "Core Function"}, {id: "contracted_service", text: "Contracted Service"}, {id: "delivery", text: "Delivery"},
+		  	{id: "contact_requested", text: "Contact Requested"}, {id: "personalized_experience", text: "Personalized Experience"}, {id: "marketing", text: "Marketing"},
+		  	{id: "marketing_thirdparties", text: "Marketing Third Parties"}, {id: "sharing_for_delivery", text: "Sharing for Delivery"}, {id: "sharing_for_marketing", text: "Sharing for Marketing"},
+		  	{id: "3rd_party_sharing_for_corefunction", text: "3rd Party Sharing for Core Function"}, {id: "legally_required_data_retention", text: "Legally Required Data Retention"},
+		  	{id: "required_by_law_enforcement_or_government", text: "Required by Law Enforcement or Government"}, {id: "protecting_your_health", text: "Protecting Your Heath"},
+		  	{id: "protecting_our_interests", text: "Protecting Our Interests"}, {id: "improve_performance", text: "Improve Performance"}
+		]
+	});
+
 	$('#svc').on('click', '.btn-add', function(event) {
 		event.preventDefault();
 		

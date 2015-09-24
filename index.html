@@ -22,6 +22,7 @@
 			}
         </style>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link href="css/select2.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/main.css">
 		<script type="text/javascript">
 		var exports = {};
@@ -68,26 +69,265 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-5">
-          <h2>Receipt Input</h2>
+          <h2>Consent Receipt Input</h2>
           <p>Form values are suggestion for reference.</p>
           <div class="container">
     <div class="row">
-        <form role="form">
-            <div class="col-lg-6">
+        <form role="form" class="form-horizontal">
+            <div class="col-lg-6" style="padding-left:0">
                 <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
-                <div class="form-group">
-                    <label for="jurisdiction">Jurisdiction of organisation</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="jurisdiction" id="jurisdiction" placeholder="Example: US" value="US" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                <div class="widget">
+                  <div class="widget-header">
+                    <h3>CR Header</h3>
+                  </div>
+                  <div class="widget-content well">
+                    <div class="form-group">
+                      <label for="jurisdiction" class="col-md-4 control-label">Jurisdiction</label>
+                      <div class="col-md-8 controls">
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="jurisdiction" id="jurisdiction" placeholder="Example: US" value="US" required>
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                      </div>
                     </div>
+
+                    <div class="form-group">
+                      <label for="timestamp" class="col-md-4 control-label">Time Stamp</label>
+                      <div class="col-md-8 controls">
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="timestamp" id="timestamp" placeholder="Issue Timestamp" value="1435367226" required>
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="method" class="col-md-4 control-label">Method Of Collection</label>
+                      <div class="col-md-8 controls">
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="method" id="method" placeholder="Webform opt in, implicit, verbal, etc" value="web form" required>
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="processor" class="col-md-4 control-label">Consent Processor</label>
+                      <div class="col-md-8 controls">
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="processor" id="processor" placeholder="URL or Internet location of processing" value="http://www.consentreceipt.org/" required>
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="uniqueID" class="col-md-4 control-label">Unique ID</label>
+                      <div class="col-md-8 controls">
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="uniqueID" id="uniqueID" placeholder="Unique identifier" value="9ef6b81a414b2432ec6e3d384c5a36cea8aa0c30d3dd2b67364126ed80856f9c20654f032eef87ad981187da8c23c1186eefe1503714835c2e952bbb3f22729c" required>
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="principal" class="col-md-4 control-label">PII Principal</label>
+                      <div class="col-md-8 controls">
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="principal" id="principal" placeholder="Email or address claim" value="example@example.com" required>
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                  <div class="form-group">
-                    <label for="InputEmail">Id of natural person</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="sub" name="sub" placeholder="Example: example@example.com" value="example@example.com" required>
+
+                <div class="widget">
+                  <div class="widget-header">
+                    <h3>Data Controller</h3>
+                  </div>
+                  <div class="widget-content well">
+                    <div class="form-group">
+                      <label class="col-md-12 control-label">Data Controller</label><br>
+                      <div class="input-group">
+                        <input type="checkbox" id="data_controller_on_behalf" value="true" checked> Is acting on behalf of company taking consent?<br>
+                      </div><br>
+
+                      <label class="col-md-3 child-label">Contact Name</label> 
+                      <div class="input-group col-md-9">
+                        <input type="text" class="form-control" id="data_controller_contact" placeholder="Example: Contact Name" value="Jon Doe" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                      </div><br>
+
+                      <label class="col-md-3 child-label">Company Name</label>
+                      <div class="input-group col-md-9">
+                        <input type="text" class="form-control" id="data_controller_company" placeholder="Example: Company Name" value="Inc." required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
+                      </div><br>
+
+                      <label class="col-md-3 child-label">Address</label>
+                      <div class="input-group col-md-9">
+                        <input type="text" class="form-control" id="data_controller_address" placeholder="Example: Address" value="123 Main St., Anywhere " required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                      </div><br>
+
+                      <label class="col-md-3 child-label">Contact Email</label>
+                      <div class="input-group col-md-9">
+                        <input type="text" class="form-control" id="data_controller_email" placeholder="Example: example@example.com" value="jon@datacontroller.com" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                      </div><br>
+
+                      <label class="col-md-3 child-label">Phone Number</label>
+                      <div class="input-group col-md-9">
+                        <input type="text" class="form-control" id="data_controller_phone" placeholder="Example: 00-000-000-0000" value="00-000-000-0000" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                      </div>
                     </div>
+
+                    <div class="form-group">
+                      <label for="policy_uri" class="col-md-4 control-label">Privacy Policy URL</label>
+                      <div class="col-md-8 controls">
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="policy_uri" id="policy_uri" placeholder="Example: http://example.com/privacy" value="http://example.com/privacy" required>
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="widget">
+                  <div class="widget-header">
+                    <h3>Purpose Specification</h3>
+                  </div>
+                  <div class="widget-content well">
+                    <div class="form-group">
+                      <label for="jurisdiction" class="col-md-4 control-label">Purpose</label>
+                      <div class="col-md-8 controls">
+                        <button class="btn btn-primary pull-right">
+                          <span class="glyphicon glyphicon-plus"></span>
+                          Add Purpose
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="purpose">
+                      <div class="form-group">
+                        <label class="col-md-4 child-label">Serice Name</label>
+                        <div class="col-md-8 controls">
+                          <div class="input-group">
+                            <input type="text" class="form-control" value="" required/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-4 child-label">Action</label>
+                        <div class="col-md-8 controls">
+                          <div class="input-group" style="width: 80%">
+                            <input class="purpose_item" type="hidden">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="widget">
+                  <div class="widget-header">
+                    <h3>Personal Information</h3>
+                  </div>
+                  <div class="widget-content well">
+                    <div class="form-group">
+                      <div class="col-md-12 controls">
+                        <div class="input-group">
+                          <input type="checkbox" id="data_controller_on_behalf" value="false"> Is any information or its use sensitive ?<br>
+                        </div><br>
+
+                        <div id="options" class="col-md-12">
+                          <label>Check your sensitive category: </label>
+                          <div class="checkbox">
+                            <label><input type="checkbox" value="">Heath</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" value="">Financial</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" value="">Child Data</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" value="">Location</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" value="">Official Identifiers</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" value="">Psycho/Social/Belief</label>
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" value="">Membership</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="widget">
+                  <div class="widget-header">
+                    <h3>Information Sharing</h3>
+                  </div>
+                  <div class="widget-content well">
+                    <div class="form-group">
+                      <label for="jurisdiction" class="col-md-4 control-label">Sharing</label>
+                      <div class="col-md-8 controls">
+                        <div class="input-group">
+                          <input type="hidden" class="js-example-tags" style="width:300px" value="?"/>
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="widget">
+                  <div class="widget-header">
+                    <h3>Optional Or In Review</h3>
+                  </div>
+                  <div class="widget-content well">
+                    <div class="form-group">
+                      <label for="notice" class="col-md-4 control-label">Notice</label>
+                      <div class="col-md-8 controls">
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="notice" id="notice" value="http://example.com/shortnotice" placeholder="Example: http://example.com/shortnotice" required/>
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="scope" class="col-md-4 control-label">Scope</label>
+                      <div class="col-md-8 controls">
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="scope" id="scope" value="read update" placeholder="What you're allowed to do on the service" required/>
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+<!-- Temporary hidden to wait fixed
+                <div class="form-group">
+                  <label for="InputEmail">Id of natural person</label>
+                  <div class="input-group">
+                      <input type="text" class="form-control" id="sub" name="sub" placeholder="Example: example@example.com" value="example@example.com" required>
+                      <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                  </div>
                 </div>
                 <div class="form-group" id="svc">
                     <label>Service Title</label>
@@ -110,38 +350,7 @@
                     </div>
                 </div>
                 
-              <div class="form-group">
-                    <label>Data Controller</label><br>
-                    <div class="input-group">
-                        <input type="checkbox" id="data_controller_on_behalf"> Is acting on behalf of company taking consent?<br>
-                      </div><br>
-                      Contact Name 
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller_contact" placeholder="Example: Contact Name" value="Contact Name" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div><br>
-                    Company Name
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller_company" placeholder="Example: Company Name" value="Company Name" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
-                      </div><br>
-                      Address
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller_address" placeholder="Example: Address" value="Address" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div><br>
-                      Contact Email
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller_email" placeholder="Example: example@example.com" value="example@example.com" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div>
-                    <br>
-                      Phone Number
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="data_controller_phone" placeholder="Example: 00-000-000-0000" value="00-000-000-0000" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div>
-                </div>
+              
                 <div class="form-group">
                     <label>Consent Transaction Data</label><br>
                     Subject:
@@ -228,7 +437,7 @@
                       
                 </div>
                 
-                
+-->                
             </div>
         </form>
         
@@ -388,6 +597,7 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
         <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/select2.min.js"></script>    
 
         <script src="js/main.js"></script>
     </body>
