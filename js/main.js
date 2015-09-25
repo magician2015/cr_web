@@ -8,8 +8,22 @@ $(document).ready(function() {
 	  tags: ["CISWG Membership","Join", "Bob’s store", "delivery"]
 	});
 
-	$(".purpose_item").select2({
-		createSearchChoice: function(term, data){
+	var listPurpose = [
+		  	{id: "core_function", text: "Core Function"}, {id: "contracted_service", text: "Contracted Service"}, {id: "delivery", text: "Delivery"},
+		  	{id: "contact_requested", text: "Contact Requested"}, {id: "personalized_experience", text: "Personalized Experience"}, {id: "marketing", text: "Marketing"},
+		  	{id: "marketing_thirdparties", text: "Marketing Third Parties"}, {id: "sharing_for_delivery", text: "Sharing for Delivery"}, {id: "sharing_for_marketing", text: "Sharing for Marketing"},
+		  	{id: "3rd_party_sharing_for_corefunction", text: "3rd Party Sharing for Core Function"}, {id: "legally_required_data_retention", text: "Legally Required Data Retention"},
+		  	{id: "required_by_law_enforcement_or_government", text: "Required by Law Enforcement or Government"}, {id: "protecting_your_health", text: "Protecting Your Heath"},
+		  	{id: "protecting_our_interests", text: "Protecting Our Interests"}, {id: "improve_performance", text: "Improve Performance"}
+		];
+	var listSensitive = [
+			{id: "biographical", text: "Biographical"}, {id: "contact", text: "Contact"}, {id: "biometric", text: "Biometric"},{id: "social_contact", text: "Social Contact"},
+			{id: "network", text: "Network/Service"}, {id: "health", text: "Health"}, {id: "financial", text: "Financial"}, {id: "officialId", text: "Official ID"},
+			{id: "social_benefit", text: "Social Benefit Data"}, {id: "judicial", text: "Judicial Data"}, {id: "asset", text: "Asset Data"}, {id: "hr", text: "HR Data"},
+			{id: "mental_health", text: "Mental Health"}, {id: "membership", text: "Membership"},{id: "behavioral", text: "Behavioral"}, {id: "profiling", text: "Profiling"}
+		];
+
+	var createOwn = function(term, data){
 			if($(data).filter(function(){
 				return this.text.localeCompare(term) === 0;
 			}).length === 0){
@@ -18,18 +32,57 @@ $(document).ready(function() {
 					text: term
 				};
 			};
-		},
-		placeholder: "Choose or enter your purpose",
-		multiple: false,
-	  	data: [
-		  	{id: "core_function", text: "Core Function"}, {id: "contracted_service", text: "Contracted Service"}, {id: "delivery", text: "Delivery"},
-		  	{id: "contact_requested", text: "Contact Requested"}, {id: "personalized_experience", text: "Personalized Experience"}, {id: "marketing", text: "Marketing"},
-		  	{id: "marketing_thirdparties", text: "Marketing Third Parties"}, {id: "sharing_for_delivery", text: "Sharing for Delivery"}, {id: "sharing_for_marketing", text: "Sharing for Marketing"},
-		  	{id: "3rd_party_sharing_for_corefunction", text: "3rd Party Sharing for Core Function"}, {id: "legally_required_data_retention", text: "Legally Required Data Retention"},
-		  	{id: "required_by_law_enforcement_or_government", text: "Required by Law Enforcement or Government"}, {id: "protecting_your_health", text: "Protecting Your Heath"},
-		  	{id: "protecting_our_interests", text: "Protecting Our Interests"}, {id: "improve_performance", text: "Improve Performance"}
-		]
+		};
+
+	function initDropdown(purposeItem, sensitiveItem){
+		purposeItem = purposeItem || $(".purpose_item");
+		sensitiveItem = sensitiveItem || $(".pi_sensitive");
+		purposeItem.select2({
+			createSearchChoice: createOwn,
+			placeholder: "Choose or enter your own purpose",
+			multiple: false,
+		  	data: listPurpose,
+			searchInputPlaceholder: "--Add your own and Enter here--"
+		});
+
+		sensitiveItem.select2({
+			placeholder: "Select PI category",
+			multiple: true,
+			data: listSensitive
+		})
+	}
+
+	initDropdown();
+
+
+	//init event
+	$('#purpose').on('click',function(event){
+		event.preventDefault();
+
+		var $purpose = $('#purpose_template .purpose').clone();
+		$('.purpose_list').append($purpose);
+
+		initDropdown($purpose.find(".purpose_item"), $purpose.find(".pi_sensitive"));
 	});
+
+	$("input#data_controller_on_behalf").on('change', function(event){
+		var check = $(this).is(":checked");
+		$("#options").css("display", check?"block":"none");
+	});
+
+	$("input#other").on('change', function(event){
+		var check = $(this).is(":checked");
+		$("#other_pi").prop("disabled", !check);
+	});
+
+	$(document).on('click', '.close', function(event) {
+		event.preventDefault();
+		
+		$(event.currentTarget.parentElement.parentElement).remove();
+		
+	});
+
+
 
 	$('#svc').on('click', '.btn-add', function(event) {
 		event.preventDefault();
@@ -42,16 +95,16 @@ $(document).ready(function() {
 		
 	});
 	
-	$('#purpose').on('click', '.btn-add', function(event) {
-		event.preventDefault();
+	// $('#purpose').on('click', '.btn-add', function(event) {
+	// 	event.preventDefault();
 		
-		$('#purpose').append('                    <div class="input-group">\n' +
-		'                        <input type="text" class="form-control" placeholder="Example: marketing">\n' +
-		'                        <span class="input-group-btn"><button type="button" class="btn btn-remove">&times;</button></span>\n' +
-		'						</div>');
+	// 	$('#purpose').append('                    <div class="input-group">\n' +
+	// 	'                        <input type="text" class="form-control" placeholder="Example: marketing">\n' +
+	// 	'                        <span class="input-group-btn"><button type="button" class="btn btn-remove">&times;</button></span>\n' +
+	// 	'						</div>');
 		
 		
-	});
+	// });
 	
 	$('#sensitive').on('click', '.btn-add', function(event) {
 		event.preventDefault();
