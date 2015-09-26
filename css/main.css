@@ -112,3 +112,18 @@ img#cis {
 #options, #purpose_template{
 	display: none;
 }
+
+.bg-success .glyphicon-ok{
+	color: green;
+	font-style: normal;
+}
+
+.bg-danger .glyphicon-remove{
+	color: red;
+	font-style: normal;
+}
+
+.bg-danger .glyphicon-warning-sign{
+	color: orange;
+	font-style: normal;
+}

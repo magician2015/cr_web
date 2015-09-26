@@ -74,7 +74,7 @@
           <p>Form values are suggestion for reference.</p>
           <div class="container">
     <div class="row">
-        <form role="form" class="form-horizontal">
+        <form role="form" class="form-horizontal" id="consent_form">
             <div class="col-lg-6" style="padding-left:0">
                 <div class="well well-sm"><strong></span>Not Required Fields</strong></div>
                 <div class="widget">
@@ -95,7 +95,7 @@
                       <label for="timestamp" class="col-md-4 control-label">Time Stamp</label>
                       <div class="col-md-8 controls">
                         <div class="input-group">
-                          <input type="text" class="form-control" name="timestamp" id="timestamp" placeholder="Issue Timestamp" value="1435367226">
+                          <input type="text" class="form-control" name="iat" id="timestamp" placeholder="Issue Timestamp">
                         </div>
                       </div>
                     </div>
@@ -104,7 +104,7 @@
                       <label for="method" class="col-md-4 control-label">Method Of Collection</label>
                       <div class="col-md-8 controls">
                         <div class="input-group">
-                          <input type="text" class="form-control" name="method" id="method" placeholder="Webform opt in, implicit, verbal, etc" value="web form">
+                          <input type="text" class="form-control" name="moc" id="method" placeholder="Webform opt in, implicit, verbal, etc" value="web form">
                         </div>
                       </div>
                     </div>
@@ -113,7 +113,7 @@
                       <label for="processor" class="col-md-4 control-label">Consent Processor</label>
                       <div class="col-md-8 controls">
                         <div class="input-group">
-                          <input type="text" class="form-control" name="processor" id="processor" placeholder="URL or Internet location of processing" value="http://www.consentreceipt.org/">
+                          <input type="text" class="form-control" name="iss" id="processor" placeholder="URL or Internet location of processing" value="http://www.consentreceipt.org/">
                         </div>
                       </div>
                     </div>
@@ -122,7 +122,7 @@
                       <label for="uniqueID" class="col-md-4 control-label">Unique ID</label>
                       <div class="col-md-8 controls">
                         <div class="input-group">
-                          <input type="text" class="form-control" name="uniqueID" id="uniqueID" placeholder="Unique identifier" value="9ef6b81a414b2432ec6e3d384c5a36cea8aa0c30d3dd2b67364126ed80856f9c20654f032eef87ad981187da8c23c1186eefe1503714835c2e952bbb3f22729c" >
+                          <input type="text" class="form-control" name="jti" id="uniqueID" placeholder="Unique identifier" value="9ef6b81a414b2432ec6e3d384c5a36cea8aa0c30d3dd2b67364126ed80856f9c20654f032eef87ad981187da8c23c1186eefe1503714835c2e952bbb3f22729c" >
                         </div>
                       </div>
                     </div>
@@ -131,7 +131,7 @@
                       <label for="principal" class="col-md-4 control-label">PII Principal</label>
                       <div class="col-md-8 controls">
                         <div class="input-group">
-                          <input type="text" class="form-control" name="principal" id="principal" placeholder="Email or address claim" value="example@example.com">
+                          <input type="text" class="form-control" name="sub" id="principal" placeholder="Email or address claim" value="example@example.com">
                         </div>
                       </div>
                     </div>
@@ -145,33 +145,33 @@
                   <div class="widget-content well">
                     <div class="form-group">
                       <label class="col-md-12 control-label">Data Controller</label><br>
-                      <div class="input-group">
-                        <input type="checkbox" id="data_controller_on_behalf" value="true" checked> Is acting on behalf of company taking consent?<br>
+                      <div class="input-group checkbox">
+                        <label><input type="checkbox" id="data_controller_on_behalf" value="true" checked name="data_controller.on_behalf"> Is acting on behalf of company taking consent?</label><br>
                       </div><br>
 
                       <label class="col-md-3 child-label">Contact Name</label> 
                       <div class="input-group col-md-9">
-                        <input type="text" class="form-control" id="data_controller_contact" placeholder="Example: Contact Name" value="Jon Doe" >
+                        <input type="text" class="form-control" id="data_controller_contact" placeholder="Example: Contact Name" value="Dave Controller" name="data_controller.contact">
                       </div><br>
 
                       <label class="col-md-3 child-label">Company Name</label>
                       <div class="input-group col-md-9">
-                        <input type="text" class="form-control" id="data_controller_company" placeholder="Example: Company Name" value="Inc.">
+                        <input type="text" class="form-control" id="data_controller_company" placeholder="Example: Company Name" value="Data Controller Inc." name="data_controller.company">
                       </div><br>
 
                       <label class="col-md-3 child-label">Address</label>
                       <div class="input-group col-md-9">
-                        <input type="text" class="form-control" id="data_controller_address" placeholder="Example: Address" value="123 Main St., Anywhere">
+                        <input type="text" class="form-control" id="data_controller_address" placeholder="Example: Address" value="123 St., Place" name="data_controller.address">
                       </div><br>
 
                       <label class="col-md-3 child-label">Contact Email</label>
                       <div class="input-group col-md-9">
-                        <input type="text" class="form-control" id="data_controller_email" placeholder="Example: example@example.com" value="jon@datacontroller.com">
+                        <input type="text" class="form-control" id="data_controller_email" placeholder="Example: example@example.com" value="dave@datacontroller.com" name="data_controller.email">
                       </div><br>
 
                       <label class="col-md-3 child-label">Phone Number</label>
                       <div class="input-group col-md-9">
-                        <input type="text" class="form-control" id="data_controller_phone" placeholder="Example: 00-000-000-0000" value="00-000-000-0000">
+                        <input type="text" class="form-control" id="data_controller_phone" placeholder="Example: 00-000-000-0000" value="00-123-341-2351" name="data_controller.phone">
                       </div>
                     </div>
 
@@ -249,7 +249,7 @@
                       <div class="col-md-12 controls">
                         <div>
                           <div class="checkbox">
-                            <label><input type="checkbox" id="data_controller_on_behalf">Are any of data types legally sensitive in the jurisdiction and context in which it is being shared?</label>
+                            <label><input type="checkbox" id="on_sensitive">Are any of data types legally sensitive in the jurisdiction and context in which it is being shared?</label>
                           </div>
                           <div class="checkbox">
                             <label><input type="checkbox" value="false" id="other">Other</label>
@@ -267,25 +267,25 @@
                         <div id="options" class="col-md-12">
                           <label>Check your sensitive category: </label>
                           <div class="checkbox">
-                            <label><input type="checkbox" value="">Heath</label>
+                            <label><input type="checkbox" value="health" name="sensitive_options">Heath</label>
                           </div>
                           <div class="checkbox">
-                            <label><input type="checkbox" value="">Financial</label>
+                            <label><input type="checkbox" value="financial" name="sensitive_options">Financial</label>
                           </div>
                           <div class="checkbox">
-                            <label><input type="checkbox" value="">Child Data</label>
+                            <label><input type="checkbox" value="child_data" name="sensitive_options">Child Data</label>
                           </div>
                           <div class="checkbox">
-                            <label><input type="checkbox" value="">Location</label>
+                            <label><input type="checkbox" value="location" name="sensitive_options">Location</label>
                           </div>
                           <div class="checkbox">
-                            <label><input type="checkbox" value="">Official Identifiers</label>
+                            <label><input type="checkbox" value="official_identifiers" name="sensitive_options">Official Identifiers</label>
                           </div>
                           <div class="checkbox">
-                            <label><input type="checkbox" value="">Psycho/Social/Belief</label>
+                            <label><input type="checkbox" value="psycho_social_belief" name="sensitive_options">Psycho/Social/Belief</label>
                           </div>
                           <div class="checkbox">
-                            <label><input type="checkbox" value="">Membership</label>
+                            <label><input type="checkbox" value="membership" name="sensitive_options">Membership</label>
                           </div>
                         </div>
 
@@ -311,7 +311,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="forparty" class="col-md-4 control-label">For </label>
+                      <label for="forparty" class="col-md-4 control-label">Data to </label>
                       <div class="col-md-8 controls">
                         <div class="input-group">
                           <input type="text" name="forparty" id="forparty" value="3rd Party Name or/3rd Party Category" placeholder="Name Or Type Of 3rd Party" class="form-control">
@@ -349,131 +349,12 @@
                       <label for="scope" class="col-md-4 control-label">Scope</label>
                       <div class="col-md-8 controls">
                         <div class="input-group">
-                          <input type="text" class="form-control" name="scope" id="scope" value="read update" placeholder="What you're allowed to do on the service"/>
+                          <input type="text" class="form-control" name="scopes" id="scope" value="read update" placeholder="What you're allowed to do on the service"/>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
-
-<!-- Temporary hidden to wait fixed
-                <div class="form-group">
-                  <label for="InputEmail">Id of natural person</label>
-                  <div class="input-group">
-                      <input type="text" class="form-control" id="sub" name="sub" placeholder="Example: example@example.com" value="example@example.com" required>
-                      <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                  </div>
-                </div>
-                <div class="form-group" id="svc">
-                    <label>Service Title</label>
-					<div class="input-group">
-						<button type="button" class="btn btn-add">+ Add New Field</button>
-					</div>
-                </div>
-                <div class="form-group">
-                    <label>Privacy Policy Link</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="policy_uri" name="policy_uri" placeholder="Example: http://example.com/policy" value="http://example.com/policy" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Link to Short Privacy Notice</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="notice" name="notice" placeholder="Example: http://example.com/notice" value="http://example.com/notice" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div>
-                </div>
-                
-              
-                <div class="form-group">
-                    <label>Consent Transaction Data</label><br>
-                    Subject:
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="consent_payload1" name="consent_payload1" placeholder="Example: Privacy Policy" value="Privacy Policy" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
-                      </div><br>
-                      Consent: 
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="consent_payload2" name="consent_payload2" placeholder="Example: agree" value="agree" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div><br>
-                    Subject: 
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="consent_payload3" name="consent_payload3" placeholder="Example: Terms of Service" value="Terms of Service" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
-                      </div><br>
-                      Consent: 
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="consent_payload4" name="consent_payload4" placeholder="Example: agree" value="agree" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div>
-                </div>
-                <div class="form-group" id="purpose">
-                    <label>Purposes</label>
-					<div class="input-group">
-						<button type="button" class="btn btn-add">+ Add New Field</button>
-					</div>
-                </div>
-                <div class="form-group">
-                    <label>PII Categories</label><br>
-                    Category:
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="pii_collected1" name="pii_collected1" placeholder="Example: name" value="name" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
-                      </div><br>
-                      Value: 
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="pii_collected2" name="pii_collected2" placeholder="Example: Alice" value="Alice" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div><br>
-                    Category: 
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="pii_collected3" name="pii_collected3" placeholder="Example: email" value="email" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
-                      </div><br>
-                      Value: 
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="pii_collected4" name="pii_collected4" placeholder="Example: example@example.com" value="example@example.com" required>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                    </div>
-                </div>
-                <div class="form-group" id="sensitive">
-                    <label>Sensitive Information</label>
-					<div class="input-group">
-						<button type="button" class="btn btn-add">+ Add New Field</button>
-					</div>
-                </div>
-                <div class="form-group" id="sharing">
-                    <label>3rd party sharing of personal information</label>
-					<div class="input-group">
-						<button type="button" class="btn btn-add">+ Add New Field</button>
-					</div>
-                </div>
-                <div class="form-group" id="context">
-                    <label>Consent Context</label>
-					<div class="input-group">
-						<button type="button" class="btn btn-add">+ Add New Field</button>
-					</div>
-                </div>
-                <div class="form-group">
-                    <label>Resource Server Identifier</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="aud" name="aud" placeholder="Example: http://example.com/protected" value="http://example.com/protected" required><span class="input-group-addon"></span>
-                      </div><br>
-                      
-                </div>
-                <div class="form-group">
-                    <label>Oauth Scopes</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="scope" name="scope" placeholder="Example: read update" value="read update" required><span class="input-group-addon"></span>
-                        
-                      </div><br>
-                      
-                </div>
-                
--->                
+                </div>          
             </div>
         </form>
         
@@ -490,32 +371,39 @@
           <p id="receipt">The unencoded contents of your receipt will appear here after you submit the form. </p>
           <div id="rhidden">
             <p></p>
+            <!--CR Header-->
             <p>
-              <button type="button" class="btn btn-info btn-xs">Jurisdiction of organisation</button>
+              <button type="button" class="btn btn-info btn-xs">Jurisdiction</button>
             </p>
             <p id="rjurisdiction" class="rindent">
             </p>
             <p>
-              <button type="button" class="btn btn-info btn-xs">Id of natural person</button>
+              <button type="button" class="btn btn-info btn-xs">Timestamp</button>
             </p>
-            <p id="rsub" class="rindent">
-            </p>
-            <p>
-              <button type="button" class="btn btn-info btn-xs">Service Title</button>
-            </p>
-            <p id="rsvc" class="rindent">
-            </p>
-            
-            <p>
-              <button type="button" class="btn btn-info btn-xs">Privacy Policy Link</button>
-            </p>
-            <p id="rpolicy_uri" class="rindent">
+            <p id="riat" class="rindent wrap">
             </p>
             <p>
-              <button type="button" class="btn btn-info btn-xs">Link to Short Privacy Notice</button>
+              <button type="button" class="btn btn-info btn-xs">Method Of Collection</button>
             </p>
-            <p id="rnotice" class="rindent">
+            <p id="rmoc" class="rindent">
             </p>
+            <p>
+              <button type="button" class="btn btn-info btn-xs">Consent Processor</button>
+            </p>
+            <p id="riss" class="rindent">
+            </p>
+            <p>
+              <button type="button" class="btn btn-info btn-xs">Unique ID</button>
+            </p>
+            <p id="rjti" class="rindent wrap">
+            </p>
+            <p>
+              <button type="button" class="btn btn-info btn-xs">PII Principal</button>
+            </p>
+            <p id="rsub" class="rindent wrap">
+            </p>
+
+            <!-- Data controller-->
             <p>
               <button type="button" class="btn btn-info btn-xs">Data Controller</button>
             </p>
@@ -531,76 +419,45 @@
               Contact Email: <span id="rdata_controller_email"></span><br>
   
               Phone Number: <span id="rdata_controller_phone"></span><br>
-             
             </p>
             <p>
-              <button type="button" class="btn btn-info btn-xs">Consent Transaction Data</button>
+              <button type="button" class="btn btn-info btn-xs">Privacy Policy URL</button>
             </p>
-            <p class="rindent">
-              Subject: <span id="rconsent_payload1"></span><br>
-              Consent: <span id="rconsent_payload2"></span>
+            <p id="rpolicy_uri" class="rindent">
             </p>
-            <p class="rindent">
-              Subject: <span id="rconsent_payload3"></span><br>
-              Consent: <span id="rconsent_payload4"></span>
-            </p>
+
+            <!--Purpose-->
             <p>
               <button type="button" class="btn btn-info btn-xs">Purposes</button>
             </p>
             <p id="rpurpose" class="rindent">
             </p>
+
+            <!--sensitive-->
             <p>
-              <button type="button" class="btn btn-info btn-xs">PII Categories</button>
-            </p>
-            <p class="rindent">
-              Category: <span id="rpii_collected1"></span><br>
-              Value: <span id="rpii_collected2"></span>
-            </p>
-            <p class="rindent">
-              Category: <span id="rpii_collected3"></span><br>
-              Value: <span id="rpii_collected4"></span>
-            </p>
-            <p>
-              <button type="button" class="btn btn-info btn-xs">Sensitive Information</button>
+              <button type="button" class="btn btn-info btn-xs">Sensitive Personal Information</button>
             </p>
             <p id="rsensitive" class="rindent">
             </p>
+
+            <!--sharing-->
             <p>
               <button type="button" class="btn btn-info btn-xs">3rd party sharing of personal information</button>
             </p>
             <p id="rsharing" class="rindent">
             </p>
+
+            <!--Optional -->
             <p>
-              <button type="button" class="btn btn-info btn-xs">Consent Context</button>
+              <button type="button" class="btn btn-info btn-xs">Link to Short Privacy Notice</button>
             </p>
-            <p id="rcontext" class="rindent">
-            </p>
-            <p>
-              <button type="button" class="btn btn-info btn-xs">Resource Server Identifier</button>
-            </p>
-            <p id="raud" class="rindent">
+            <p id="rnotice" class="rindent">
             </p>
             <p>
               <button type="button" class="btn btn-info btn-xs">Oauth Scopes</button>
             </p>
             <p id="rscope" class="rindent">
-            </p>
-            <p>
-              <button type="button" class="btn btn-info btn-xs">Issuer</button>
-            </p>
-            <p id="riss" class="rindent">
-            </p>
-            
-            <p>
-              <button type="button" class="btn btn-info btn-xs">Transaction Number</button>
-            </p>
-            <p id="rjti" class="rindent wrap">
-            </p>
-            <p>
-              <button type="button" class="btn btn-info btn-xs">Timestamp</button>
-            </p>
-            <p id="riat" class="rindent wrap">
-            </p>
+            </p>            
 			<p id="sig" class="bg-warning">Checking signature...</p>
 			
 

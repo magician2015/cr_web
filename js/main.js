@@ -1,5 +1,29 @@
 
 $(document).ready(function() {
+	var HOST = "http://localhost:3000/api";
+
+	$.fn.serializeObject = function()
+	{
+	    var o = {};
+	    var a = this.serializeArray();
+	    $.each(a, function() {
+	        if (o[this.name] !== undefined) {
+	            if (!o[this.name].push) {
+	                o[this.name] = [o[this.name]];
+	            }
+	            o[this.name].push(this.value || '');
+	        } else {
+	        	var splitName = this.name.split(".");
+	        	if(splitName.length > 1){
+	        		o[splitName[0]] = o[splitName[0]] || {}
+	        		o[splitName[0]][splitName[1]] = this.value || '';
+	        	}else{
+	        		o[this.name] = this.value || '';	
+	        	}
+	        }
+	    });
+	    return o;
+	};
 	
 	// prevent accidental form submission on 'enter'
 	$('input,select').keypress(function(event) { return event.keyCode != 13; });
@@ -65,7 +89,7 @@ $(document).ready(function() {
 		initDropdown($purpose.find(".purpose_item"), $purpose.find(".pi_sensitive"));
 	});
 
-	$("input#data_controller_on_behalf").on('change', function(event){
+	$("input#on_sensitive").on('change', function(event){
 		var check = $(this).is(":checked");
 		$("#options").css("display", check?"block":"none");
 	});
@@ -81,6 +105,172 @@ $(document).ready(function() {
 		$(event.currentTarget.parentElement.parentElement).remove();
 		
 	});
+
+	function initData(){
+		var timestamp = Math.floor(Date.now()/1000);
+		$("#timestamp").val(timestamp);
+		$.get(HOST + "/token", function(data){
+			$("#uniqueID").val(data);
+		})
+	}
+
+	function serializeForm(){
+		var data = $("#consent_form").serializeObject();
+		data.data_controller.on_behalf = (data.data_controller.on_behalf == 'true');
+		return data;
+	}
+
+	function getPurposeList(){
+		listPurpose = [];
+		$(".purpose_list .purpose").each(function(item){
+			var purpose = {};
+			purpose.serviceName = $(this).find("input[type='text']").val();
+			purpose.purpose = $(this).find(".purpose_item").select2("val");
+			purpose.pi = $(this).find(".pi_sensitive").select2("val");
+			listPurpose.push(purpose);
+		})
+		return listPurpose;
+	}
+
+	function getSensitiveInformation(){
+		var sensitiveList = [];
+		if($("input#on_sensitive").is(":checked")){
+			$.each($("input[name='sensitive_options']:checked"), function() {
+			  	sensitiveList.push($(this).val());
+			});
+		}
+		if($("input#other").is(":checked")){
+			sensitiveList.push($("#other_pi").val());
+		}
+		return sensitiveList;
+	}
+
+	$('#submit').on('click', function(event) {
+		event.preventDefault();
+		$('html, body').animate({
+			scrollTop: $(".receipt").offset().top - 55
+		}, 1000);
+
+		postData = serializeForm();
+		var purposeList = getPurposeList();
+		postData.sensitive = getSensitiveInformation();
+		//waiting for confirm about format
+		postData.purpose = [];
+		postData.sharing = [];
+		postData.pii_collected = {};
+
+		$.ajax({
+			type: "POST",
+			url: HOST + "/mvcr",
+			data: JSON.stringify(postData),
+			contentType : "application/json", 
+			success: function (data) {
+				console.log("SUCCESS: ", data);
+				var receipt = new Blob([data], {type: "application/jwt"});
+				var url  = URL.createObjectURL(receipt);
+				var segments = data.split('.');
+				var payloadSeg = segments[1];
+
+				var payload = b64utos(payloadSeg);
+				var opayload = JSON.parse(payload);
+				console.log(opayload);
+
+				$("#rjurisdiction").html(opayload.jurisdiction);
+				$("#rsub").html(opayload.sub);
+				$("#rnotice").html(opayload.notice);
+				$("#rpolicy_uri").html(opayload.policy_uri);
+				$("#rdata_controller_on_behalf").html((opayload.data_controller['on_behalf'] ? 'yes' : 'no'));
+				$("#rdata_controller_contact").html(opayload.data_controller['contact']);
+				$("#rdata_controller_company").html(opayload.data_controller['company']);
+				$("#rdata_controller_address").html(opayload.data_controller['address']);
+				$("#rdata_controller_email").html(opayload.data_controller['email']);
+				$("#rdata_controller_phone").html(opayload.data_controller['phone']);
+				$('#rpurpose').empty();
+				if (opayload.purpose.length > 0) {
+					$.each(opayload.purpose, function(index, value) {
+						$("#rpurpose").append('<p>' + value + '</p>');
+					});
+				} else {
+						$("#rpurpose").append('<p>None</p>');
+				}
+
+				$('#rsensitive').empty();
+				if (opayload.sensitive.length > 0) {
+					$.each(opayload.sensitive, function(index, value) {
+						$("#rsensitive").append('<p>' + value + '</p>');
+					});
+				} else {
+					$("#rsensitive").append('<p>None</p>');
+				}
+
+				$('#rsharing').empty();
+				if (opayload.sharing.length > 0) {
+					$.each(opayload.sharing, function(index, value) {
+						$("#rsharing").append('<p>' + value + '</p>');
+					});
+				} else {
+					$("#rsharing").append('<p>None</p>');
+				}
+				
+				$("#rmoc").html(opayload.moc);
+				$("#rscope").html(opayload.scopes);
+				$("#riss").html(opayload.iss);
+				var iat = opayload.iat*1000;
+				iat = new Date(iat);
+				$("#riat").html(iat);
+				$("#rjti").html(opayload.jti);
+
+
+				$("#rhidden").show("slow");
+				$("#receipt").hide("slow");
+
+				$("#receiptdl a").attr('href', url);
+				$("#receiptdl a").attr('disabled', false);
+
+				//
+				// check signature
+				//
+   
+				// fetch key
+				var jwt = data;
+				$.ajax({
+					type: "GET",
+					url: HOST + "/jwk",
+					data: "json",
+					success: function(data) {
+						console.log(data);
+						var key = KEYUTIL.getKey(data.keys[0]); // there's only one key to parse
+				
+						// validate the JWT
+						var isValid = KJUR.jws.JWS.verify(jwt, key);
+						if (isValid) {
+							$('#sig').removeClass('bg-warning');
+							$('#sig').addClass('bg-success');
+							$('#sig').html('<span class="glyphicon glyphicon-ok"></span> Receipt signature is valid.');
+						} else {
+							$('#sig').removeClass('bg-warning');
+							$('#sig').addClass('bg-danger');
+							$('#sig').html('<span class="glyphicon glyphicon-remove"></span> Receipt signature is invalid.');
+						}
+					},
+					error: function() {
+						$('#sig').removeClass('bg-warning');
+						$('#sig').addClass('bg-danger');
+						$('#sig').html('<span class="glyphicon glyphicon-warning-sign"></span> Unable to fetch key for receipt.');
+					}
+				});
+   
+			},
+			error: function(data) {
+				console.log(data);
+				console.log("ERROR");
+			}
+		});
+
+	});
+
+
+	initData();
 
 
 
@@ -138,7 +328,7 @@ $(document).ready(function() {
 		
 	});
 	
-	$('#submit').on('click', function(event) {
+	$('#submit_old').on('click', function(event) {
 	  
 		event.preventDefault();
 		$('html, body').animate({
@@ -310,5 +500,136 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+	function test_json(){
+		var json_data = {
+		 	"jurisdiction" : "US",
+		 	"iat": 1443282118,
+		 	"moc": "web form",
+		 	"iss": "http://www.consentreceipt.org/",
+		 	"jti": "cba37edd4e223a44ea0197498663af81c0d68cdf7b5f13975096e34435339e51f86b6bf674f9725632b6f451b4a78c2fb09d3fcd38c978f004fcf99e65bdceab",
+		 	"sub" : "example@example.com" ,
+
+		 	"data_controller" : {"on_behalf": true, "contact": "Dave Controller", "company": "Data Controller Inc.", "address": "123 St., Place", "email": "dave@datacontroller.com", "phone": "00-123-341-2351"},
+		 	"policy_uri" : "http://example.com/privacy" ,
+
+		 	"purpose" : ["CISWG Membership", "Join"],
+
+		 	"pii_collected" : {"name" : "Sarah Squire","email" : "sarah@engageidentity.com"} ,
+			"sensitive" : ["health"] ,
+
+			"sharing" : ["contact information","demographic information"],
+
+			"notice" : "http://example.com/shortnotice" ,
+			"scopes" : "read update"
+		}
+
+		$.ajax({
+				type: "POST",
+				url: HOST + "/mvcr",
+				data: JSON.stringify(json_data),
+				contentType : "application/json", 
+				success: function (data) {
+					console.log("SUCCESS: ", data);
+					var receipt = new Blob([data], {type: "application/jwt"});
+					var url  = URL.createObjectURL(receipt);
+					var segments = data.split('.');
+					var payloadSeg = segments[1];
+
+					var payload = b64utos(payloadSeg);
+					var opayload = JSON.parse(payload);
+					console.log(opayload);
+
+					$("#rjurisdiction").html(opayload.jurisdiction);
+					$("#rsub").html(opayload.sub);
+					$("#rnotice").html(opayload.notice);
+					$("#rpolicy_uri").html(opayload.policy_uri);
+					$("#rdata_controller_on_behalf").html((opayload.data_controller['on_behalf'] ? 'yes' : 'no'));
+					$("#rdata_controller_contact").html(opayload.data_controller['contact']);
+					$("#rdata_controller_company").html(opayload.data_controller['company']);
+					$("#rdata_controller_address").html(opayload.data_controller['address']);
+					$("#rdata_controller_email").html(opayload.data_controller['email']);
+					$("#rdata_controller_phone").html(opayload.data_controller['phone']);
+					$('#rpurpose').empty();
+					if (opayload.purpose.length > 0) {
+						$.each(opayload.purpose, function(index, value) {
+							$("#rpurpose").append('<p>' + value + '</p>');
+						});
+					} else {
+							$("#rpurpose").append('<p>None</p>');
+					}
+
+					$('#rsensitive').empty();
+					if (opayload.sensitive.length > 0) {
+						$.each(opayload.sensitive, function(index, value) {
+							$("#rsensitive").append('<p>' + value + '</p>');
+						});
+					} else {
+						$("#rsensitive").append('<p>None</p>');
+					}
+
+					$('#rsharing').empty();
+					if (opayload.sharing.length > 0) {
+						$.each(opayload.sharing, function(index, value) {
+							$("#rsharing").append('<p>' + value + '</p>');
+						});
+					} else {
+						$("#rsharing").append('<p>None</p>');
+					}
+					
+					$("#rmoc").html(opayload.moc);
+					$("#rscope").html(opayload.scopes);
+					$("#riss").html(opayload.iss);
+					var iat = opayload.iat*1000;
+					iat = new Date(iat);
+					$("#riat").html(iat);
+					$("#rjti").html(opayload.jti);
+
+
+					$("#rhidden").show("slow");
+					$("#receipt").hide("slow");
+
+					$("#receiptdl a").attr('href', url);
+					$("#receiptdl a").attr('disabled', false);
+
+					//
+					// check signature
+					//
+	   
+					// fetch key
+					var jwt = data;
+					$.ajax({
+						type: "GET",
+						url: HOST + "/jwk",
+						data: "json",
+						success: function(data) {
+							console.log(data);
+							var key = KEYUTIL.getKey(data.keys[0]); // there's only one key to parse
+					
+							// validate the JWT
+							var isValid = KJUR.jws.JWS.verify(jwt, key);
+							if (isValid) {
+								$('#sig').removeClass('bg-warning');
+								$('#sig').addClass('bg-success');
+								$('#sig').html('<span class="glyphicon glyphicon-ok"></span> Receipt signature is valid.');
+							} else {
+								$('#sig').removeClass('bg-warning');
+								$('#sig').addClass('bg-danger');
+								$('#sig').html('<span class="glyphicon glyphicon-remove"></span> Receipt signature is invalid.');
+							}
+						},
+						error: function() {
+							$('#sig').removeClass('bg-warning');
+							$('#sig').addClass('bg-danger');
+							$('#sig').html('<span class="glyphicon glyphicon-warning-sign"></span> Unable to fetch key for receipt.');
+						}
+					});
+				},
+				error: function(data){
+					console.log("ERROR: ", data);
+				}
+			});
+	}
+
 });
 
