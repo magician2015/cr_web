@@ -305,7 +305,7 @@
                       <label for="sharing" class="col-md-4 control-label">Sharing </label>
                       <div class="col-md-8 controls">
                         <div class="input-group">
-                          <input type="hidden" class="pi_sensitive" style="width:300px" value="?"/>
+                          <input type="hidden" style="width:300px" id="sharing"/>
                         </div>
                       </div>
                     </div>
@@ -314,7 +314,7 @@
                       <label for="forparty" class="col-md-4 control-label">Data to </label>
                       <div class="col-md-8 controls">
                         <div class="input-group">
-                          <input type="text" name="forparty" id="forparty" value="3rd Party Name or/3rd Party Category" placeholder="Name Or Type Of 3rd Party" class="form-control">
+                          <input type="text" id="forparty" value="3rd Party Name or/3rd Party Category" placeholder="Name Or Type Of 3rd Party" class="form-control">
                         </div>
                       </div>
                     </div>
@@ -323,7 +323,7 @@
                       <label for="sharing" class="col-md-4 control-label">For the purpose of </label>
                       <div class="col-md-8 controls">
                         <div class="input-group">
-                          <input type="hidden" class="purpose_item"/>
+                          <input type="hidden" id="sharing_purpose"/>
                         </div>
                       </div>
                     </div>
@@ -445,6 +445,7 @@
               <button type="button" class="btn btn-info btn-xs">3rd party sharing of personal information</button>
             </p>
             <p id="rsharing" class="rindent">
+              Sharing <span id="rsharing_data"></span> data to <span id="rsharing_name"></span> for the purpose of <span id="rsharing_purpose"></span>
             </p>
 
             <!--Optional -->
