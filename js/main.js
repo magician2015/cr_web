@@ -1,7 +1,7 @@
 
 $(document).ready(function() {
-	// var HOST = "http://localhost:3000/api";
-	var HOST = "http://api.consentreceipt.org/api";
+	var HOST = "https://mvcr.herokuapp.com/api";
+//	var HOST = "http://api.consentreceipt.org/api";
 
 	$.fn.serializeObject = function()
 	{
